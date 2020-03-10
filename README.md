@@ -1,9 +1,9 @@
 # Projects
 A collection of applied mathematics and computational/mathematical physics projects
 
-1- Stability of time-stepping schemes
+1- Stability of Time-Stepping Schemes : Basic time-stepping schemes, e.g., forward and backward Euler, involve discretisation in both space and time for time-dependent partial differential equations. Issues of numerical stability as the solution is propagated in time and accuracy from the space-time discretisation are of great concern for any implementation. The optimal choice of the time-stepping scheme depends on its purpose to obtain a time-accurate discretisation of a highly dynamic flow problem or to march the numerical solution to a steady state starting with some reasonable initial guess. Every scheme eventually leads to an iteration procedure which the computer can use to advance the solution in time. This project assesses the credibility of the solution and determines the ratio (or a number) that controls the accuracy and stability of the chosen scheme. Equations such as wave and heat differential equations are to be examined using MATLAB software.
 
-2- Independent Component Analysis for Image Separation
+2- Independent Component Analysis for Image Separation: Independent component analysis (ICA) is a statistical and computational technique for revealing hidden factors that underlie sets of random variables, measurements or signals. ICA can be seen as an extension to principal component analysis (PCA). What distinguishes ICA from other methods is that it looks for components that are both statistically independent, and non-Gaussian. Its applications are wide and varied and the data analysed by ICA could originate from many different application fields, including digital images and document databases, as well as economic indicators and psychometric measurements. The primary focus of this project will be the application of ICA in the context of digital image separation. The method proposed here is to separate two images relies on reversing the action of the singular value decomposition (SVD) method on two statistically independent images.
 
 3- 
 
