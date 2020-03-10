@@ -1,5 +1,5 @@
 # Projects
-                  **A list of "applied mathematics" and/or "computational/mathematical physics" projects**
+***A list of "applied mathematics" and/or "computational/mathematical physics" projects***
 
 1- **Stability of Time-Stepping Schemes** : Basic time-stepping schemes, e.g., forward and backward Euler, involve discretisation in both space and time for time-dependent partial differential equations. Issues of numerical stability as the solution is propagated in time and accuracy from the space-time discretisation are of great concern for any implementation. The optimal choice of the time-stepping scheme depends on its purpose to obtain a time-accurate discretisation of a highly dynamic flow problem or to march the numerical solution to a steady state starting with some reasonable initial guess. Every scheme eventually leads to an iteration procedure which the computer can use to advance the solution in time. This project assesses the credibility of the solution and determines the ratio (or a number) that controls the accuracy and stability of the chosen scheme. Equations such as wave and heat differential equations are to be examined using MATLAB software.
 
