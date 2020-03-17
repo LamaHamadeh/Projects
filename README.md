@@ -7,10 +7,13 @@
 
 4- ***Numerical Analysis of Shallow-Water Equations (Solution to two-dimensional incompressible Navier-Stokes Equations with vorticity-stream-function Approach.)***: The world is governed by natural laws many of which can be expressed by a system of PDEs. An important example are the Nervier-Stokes equations that, together with the Continuity Equations form a system of 6 coupled PDEs which describe fluid flow in 3D. these equations are difficult to solve even approximately. This system can be simplified using The Shallow Water Equations (SWE). SWE are of fundamental interest in several contexts. In one sense, the ocean can be thought of as a shallow-water description over the surface of the Earth. The atmosphere can be also thought of as a relatively thin layer of fluid (gas) above the surface of the Earth. To understand the motion in the shallow-water limit, in this project, we will introduce the concept of a stream-function ψ and vorticity ω as dependent variables and how they are coupled to one another through the streamfunction-vorticity formulation and how to solve these equations numerically via MATLAB software using:  
 1-Finite Difference Method  
-2-Fourier Transform  
+2-Fourier Transform    
+
+5- ***Heat Equation***: Here we will solve the 1D and 2D heat transfer equation, i.e., diffusion equation using two methods:   
+1-Finite Difference Method   
 3-Chebychev Transform  
 
-5- ***Supervised Classification of Breast Cancer Dataset***: 
+6- ***Supervised Classification of Breast Cancer Dataset***: 
 
 
 
