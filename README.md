@@ -11,7 +11,7 @@
 3-Chebychev Transform 
 
 5- ***Heat Equation***: Here we will solve the 1D and 2D heat transfer equation, i.e., diffusion equation, using two methods:   
-1-Finite Difference Method 
+1-Finite Difference Method  
 2-Fourier Transform  
 3-Chebychev Transform  
 
