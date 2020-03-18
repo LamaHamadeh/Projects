@@ -1,5 +1,10 @@
 
-%polynomial interpolation in equispaced and Chebychev points
+%%polynomial interpolation in equispaced and Chebychev points
+%Degree N interpolation of u(x) = 1/(1+16*x^2) in N+1 equispaced and
+%Chebychev points for N=12 and N=14. With increasing N, the erroer increase
+%exponentially in the equispaced case - the Runge phenomenon - whereas in
+%the Chebychev case they decrease exponentially. 
+
 
 %number of grid points
 %N=12; 
