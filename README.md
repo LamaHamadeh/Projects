@@ -8,13 +8,13 @@
 4- ***Numerical Analysis of Shallow-Water Equations (Solution to two-dimensional incompressible Navier-Stokes Equations with vorticity-stream-function Approach.)***: The world is governed by natural laws many of which can be expressed by a system of PDEs. An important example are the Nervier-Stokes equations that, together with the Continuity Equations form a system of 6 coupled PDEs which describe fluid flow in 3D. these equations are difficult to solve even approximately. This system can be simplified using The Shallow Water Equations (SWE). SWE are of fundamental interest in several contexts. In one sense, the ocean can be thought of as a shallow-water description over the surface of the Earth. The atmosphere can be also thought of as a relatively thin layer of fluid (gas) above the surface of the Earth. To understand the motion in the shallow-water limit, in this project, we will introduce the concept of a stream-function ψ and vorticity ω as dependent variables and how they are coupled to one another through the streamfunction-vorticity formulation and how to solve these equations numerically via MATLAB software using three methods:  
 1-Finite Difference Method  
 2-Fourier Transform  
-3-Chebychev Transform/Differentiation   
+3-Chebychev Spectral Differentiation   
 
 5- ***Numerical Analysis of Heat Equation***: The diffusion equation is a partial differential equation which describes density fluctuations in a material undergoing diffusion. This equation is also called the heat equation and also describes the distribution of
 a heat in a given region over time. This equation can describes many natural science and engineering phenomena that involve diffusion, such as: the diffusion of heat in the skin as a result of a burning accident, the diffusion of electrons when their density in solids is not in equilibrium, the diffusion of the plasma based on the strength of an external magnetic field, and many more. This equation can be solved either analytically or numerically. It is mathematically relatively simple and analytical solutions can be easily found if geometry and boundary conditions are not too complicated. For the numericaly treatment, a plethora of methods can be used to solve such essential and basic equation. In this project, we will solve the 1D and 2D heat transfer equation, using three methods:   
 1-Finite Difference Method  
 2-Fourier Transform  
-3-Chebychev Transform/Differentiation   
+3-Chebychev Spectral Differentiation   
 
 6- ***Supervised Classification of Breast Cancer Dataset***: 
 
