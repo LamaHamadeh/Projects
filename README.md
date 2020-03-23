@@ -16,6 +16,10 @@ a heat in a given region over time. This equation can describes many natural sci
 2-Fourier Transform  
 3-Chebychev Spectral Differentiation   
 
+6- ***Image Denoising***: With the explosion in the number of digital images taken every day, the demand for more accurate and visually pleasing images is increasing. However, the images captured by modern cameras are inevitably degraded by noise, which leads to deteriorated visual image quality. Therefore, work is required to reduce noise without losing image features (edges, corners, and other sharp structures). Image denoising is to remove noise from a noisy image, so as to restore the true image. In this project, we present two image denoising techniques, Gaussian and Shannon filters, to see and layout each one's own advantages and disadvantages. 
+
+
+
 6- ***Supervised Classification of Breast Cancer Dataset***: 
 
 
