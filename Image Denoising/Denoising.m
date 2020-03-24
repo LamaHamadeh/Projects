@@ -49,7 +49,7 @@ F = zeros(size(Abw,1),size(Abw,1));
 Fx = 1513-width:1:1513+width; %Or: (size(Abw,1)/2)+1-width:1:(size(Abw,1)/2)+1+width
 Fy = 1513-width:1:1513+width;
 F(Fx,Fy) = ones(length(2*width+1),length(2*width+1));
-%apply the filter on the transform shifted image
+%apply/convolving the filter on/with the transform shifted image
 Btsf = Bts.*F; 
 %plotting
 subplot(2,2,3)
