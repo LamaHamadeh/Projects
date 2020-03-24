@@ -41,14 +41,18 @@ ky = 1:size(Abw,1);
 [KX,KY] = meshgrid(kx,ky);
 
 %build a filter
-width = 50; %the smaller the width the better the filtering
-%Guassian filter
+
+%First: Guassian filter (Bell filter)
+%width = 0.001; %the smaller the width the better the filtering
 %F = exp(-width*(KX-1513).^2-width*(KY-1513).^2); 
-%Shannon filter
+
+%Second: Shannon filter (square filter)
+width = 50; %the smaller the width the better the filtering
 F = zeros(size(Abw,1),size(Abw,1)); 
 Fx = 1513-width:1:1513+width; %Or: (size(Abw,1)/2)+1-width:1:(size(Abw,1)/2)+1+width
 Fy = 1513-width:1:1513+width;
 F(Fx,Fy) = ones(length(2*width+1),length(2*width+1));
+
 %apply/convolving the filter on/with the transform shifted image
 Btsf = Bts.*F; 
 %plotting
@@ -66,6 +70,7 @@ imshow(uint8(Bf)) %show it as an image
 colormap(gray(256));
 title('Reconstructed Filtered Image')
 %--------------------
+
 %show the performance of the Gaussian filter as the width decreases
 % figure(2)
 % 
@@ -98,7 +103,6 @@ title('Reconstructed Filtered Image')
 %     colormap(gray(256))
 %     drawnow
 % end
-
 
 %--------------------
 
