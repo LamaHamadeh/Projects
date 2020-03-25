@@ -4,8 +4,7 @@ close all;
 clear all;
 
            %%% Define Discretised spatial and time variables %%% 
-
-           
+        
 %Spatial variable on x direction
 Lx=4; %LED's length
 delta=0.05; %spatial step size
@@ -70,6 +69,20 @@ D = 0.00001;
 [Time,Sol] = ode45('FFT_rhs',tspan,Ut,[], KX, KY,D);
 %--------------
 
+                        %%% Plotting %%%
+
+for i = 1:length(tspan)
+    subplot(3,5,i)
+    test = Sol(i,:);
+    test = ifft2(ifftshift(reshape(test,Nx,Nx))); 
+    pcolor(abs(test));
+    colormap jet
+    shading interp
+    axis square
+    drawnow;
+end
+%--------------
+
                        %%% Make a video %%%
 figure;
 loops = size(Sol,1);
@@ -93,13 +106,4 @@ writeVideo(v, F);
 close(v);
 %--------------
 
-for i = 1:length(tspan)
-    subplot(3,5,i)
-    test = Sol(i,:);
-    test = ifft2(ifftshift(reshape(test,Nx,Nx))); 
-    pcolor(abs(test));
-    colormap jet
-    shading interp
-    axis square
-    drawnow;
-end
+
