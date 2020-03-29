@@ -20,4 +20,4 @@ a heat in a given region over time. This equation can describes many natural sci
 
 7- ***Time-Frequency Analysis and Gabor Transform***: Fourier transform analysis has long been recognised as the great tool for the study of analysing the properties of signals. Fourier Transform represents a signal in its frequency domain with no ability to view the distribution of various frequencies in time. This is one of the shortfalls of the Fourier transform analysis since it precludes a very practical notion, namely the notion of frequencies changing with time. One of the earliest mathematical techniques used to remedy this deficiency is the Gabor transform. It permits a time-frequency representation of a signal, hence making it possible to view the frequency spectrum locally in time.
 
-6- ***Classical and quantum oscillators***: 
+6- ***Classical and Quantum Oscillators***: 
