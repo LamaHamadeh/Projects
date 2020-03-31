@@ -98,17 +98,17 @@ alpha = 0.255;
 % Constructing the spatial matrix using Finite-Difference Method (FDM)
 A=zeros(N,N); %matrix of zero elements
 %the diagonal elements
-        for n=1:N  %the number of colomns/rows
-             A(n,n) = 2/dq^2 + alpha * q(n)^2;  %the value of each diagonal element 
-        end
+for n=1:N  %the number of colomns/rows
+    A(n,n) = 2/dq^2 + alpha * q(n)^2;  %the value of each diagonal element 
+end
 
-    %the off-diagonal elements
-    for n=1:N-1       
-        A(n+1,n) = -1/dq^2; %the value of each lower off-diagonal element
-    end 
-    for n=2:N        
-        A(n-1,n) = -1/dq^2; %the value of each upper off-diagonal element
-    end
+%the off-diagonal elements
+for n=1:N-1       
+    A(n+1,n) = -1/dq^2; %the value of each lower off-diagonal element
+end 
+for n=2:N        
+    A(n-1,n) = -1/dq^2; %the value of each upper off-diagonal element
+end
 
 %computing eigenfunctions and eigenvalues
 [Eigen_Fun,Eigen_Val] = eig(A);
