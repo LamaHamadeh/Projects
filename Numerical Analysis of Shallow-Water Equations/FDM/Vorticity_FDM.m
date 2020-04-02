@@ -66,8 +66,21 @@ C = (1/2/delta).*C;
 %Create a meshgrid to let Matlab know the x and y directions
 [X,Y] = meshgrid(x,y);
 % Defining vorticity initial state/condition:
-w0 = exp(-(X).^2 - ((Y.^2)/20)); %2D Gaussian Function 
+
+%option 1: %one Gaussian at the centre
+% w0 = exp(-2*X.^2-Y.^2/20); 
+% w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
+
+%option 2: %two same gaussians voticies next to each other which can be
+%made to collide
+w0 = exp(-2*(X+2).^2-(Y).^2/20) + exp(-2*(X-2).^2-(Y).^2/20); 
 w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
+
+%option 3: %multiple gaussians
+% w0 = exp(-2*(X+6).^2-(Y).^2/10) + exp(-2*(X-6).^2-(Y).^2/10)...
+%     +exp(-2*(X).^2-(Y+6).^2/10) + exp(-2*(X).^2-(Y-6).^2/10); 
+% w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
+
 
 
                 %%%Iterate and integrate over time %%%
