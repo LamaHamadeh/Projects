@@ -85,7 +85,7 @@ w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
                 %%%Iterate and integrate over time %%%
 %ode45
-[Time,Omega] = ode45('fdm_rhs',tspan,w_vec,[],A,B,C); 
+[Time,Omega] = ode45('fdm_rhs',tspan,w_vec,[],A,B,C); %ode23 can also be used
 
 
                        %%% plotting %%%
