@@ -124,7 +124,7 @@ title(['Thermal conductivity= ', num2str(k), ' and coffee temperature= ', ...
     num2str(Tcoffee_C),' C^0'])
 legend('0 sec','1 sec','2 sec','3 sec','4 sec','Location','NorthWest')
 set(gca,'FontSize',16)
-axis([0 2 37 85]);
+axis([0 L Tbody_C Tcoffee_C]);
 
 %3D plot
 figure(2)    
