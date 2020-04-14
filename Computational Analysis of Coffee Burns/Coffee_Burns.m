@@ -54,54 +54,89 @@ Tcoffee1_K = Tcoffee1_C + 273.15; %kelvin
 %plot(X,U(1,:),'b',X,U(100,:),'r',X,U(200,:),'g',X,U(300,:),'k',X,U(400,:),'m')
 
 
-                     %----------------
                     %%%Numerical Solution
+%initialise numerical variables
+%space 
+L = 2; %skin depth
+dx = 0.2; %space step
+nx = L/dx; %number of space points
+x = linspace(0,L,nx); %space variable
+%time 
+Time = 4; %maximum time 
+dt = 0.02; %time step
+nt = Time/dt; %number of time points
+t = linspace(0,Time,nt); %time variable
 
-%initialise the grid
-%space variable
-L = 2;
-n=400;
-x2 = linspace(0,L,n+1);
-x = x2(1:n);
-dx = 0.5;
-%time variable
-dt = 0.02;
-Time = 4;
-t = 0:dt:Time;
-%CFL to ensure stability
+%themral conductivity
+k = 0.209; %epidermis dominated effect
+%k = 0.322; %dermis dominated effect
+
+%CFL number to ensure stability (less or equal to 0.5)
 CFL = dt/dx^2;
 
-%define solution matrix
-Tsol = zeros(length(x),length(t));
+%Define boundary temperatures
+%body temperature 
+Tbody_C = 37; %in celsius
+Tbody_K = Tbody_C + 273.15; %kelvin
+%coffee temperature 1
+% Tcoffee_C = 60; %in celsius
+% Tcoffee_K = Tcoffee_C + 273.15; %kelvin
+%coffee temperature 2
+Tcoffee_C = 82; %in celsius
+Tcoffee_K = Tcoffee_C + 273.15; %kelvin
+
 %initial condition
-Tsol(:,1)=Tbody_K;
-T0 = Tsol(:,1);
+Tini = zeros(nx,1);
+Tini(:,1) = Tbody_K;
+
 %boundary conditions
-Tsol(1,:) = Tbody_K;
-Tsol(n,:) = Tcoffee1_K;
+%BC at x=0
+T0 = zeros(1,nt); %define a vector
+T0(1,:) = Tbody_K; 
+%BC at x=L
+TL = zeros(1,nt); %define a vector
+TL(1,:) = Tcoffee_K;
 
-%laplacian matrix
-e1 = ones(n,1);
-A = spdiags([e1 -2*e1 e1],[-1 0 1],n,n);
-A(1,n) = 1;
-A(n,1) = 1;
+%construct the solution matrix
+Tsol = zeros(nx,nt); %define the dimensions of the solution matrix
+Tsol(1,:) = T0; %insert the first BC
+Tsol(nx,:) = TL; %insert the second BC
+Tsol(:,1) = Tini; %insert the IC
 
-%solve using Forward Euler method
-for j = 1:length(t)-1
-    T1 = T0+CFL*A*T0;
-    T0 = T1;
-    Tsol(:,j+1) = T0; 
+%set up the iteration process for forward Euler method
+for i = 1:nt-1
+    for j = 2:nx-1
+        Tsol(j,i+1) = Tsol(j,i) + k * CFL *(Tsol(j+1,i)-2*Tsol(j,i)+Tsol(j-1,i));
+    end
 end
 
-%back to celsius
+%convert the solution to celsius
 Tsol = Tsol-273.15;
 
-plot(x,Tsol(:,200))
 %plotting
-waterfall(x,t,Tsol');
-map = [0 0 0]; %BW
-colormap(map);
- 
+%for different time steps
+figure(1)
+plot(x,Tsol(:,1),'b',x,Tsol(:,50),'r',x,Tsol(:,100),'g',...
+    x,Tsol(:,150),'m',x,Tsol(:,200),'k','LineWidth',2)
+xlabel('Depth (mm)')
+ylabel('Temperature (C^0)')
+title(['Thermal conductivity= ', num2str(k), ' and coffee temperature= ', ...
+    num2str(Tcoffee_C),' C^0'])
+legend('0 sec','1 sec','2 sec','3 sec','4 sec','Location','NorthWest')
+set(gca,'FontSize',16)
+axis([0 2 37 85]);
+
+%3D plot
+figure(2)    
+mesh(x,t,Tsol')
+colormap(jet)
+shading interp
+xlabel('Depth (mm)')
+ylabel('Time (Sec)')
+zlabel('Temperature (C^0)')
+colorbar
+set(gca,'FontSize',16)
+
 
 
 
