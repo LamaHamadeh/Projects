@@ -11,12 +11,12 @@ close all;
 Nx=64; %number of spatial points
 x2 = linspace(-10,10,Nx+1); %x variable
 x = x2(1:Nx);
-Lx = 20; %x domain
+Lx = 20;
 %Spatial variable on y direction
 Ny=64; %number of spatial points
 y2 = linspace(-10,10,Ny+1); %y variable
 y = y2(1:Ny);
-Ly = 20; %y domain
+Ly = 20;
 delta=20/Nx; %spatial step size
 %Total matrix size
 N = Nx*Ny;
@@ -32,7 +32,7 @@ nu = 0.001;
 %x direction
 kx = (2*pi/Lx)*[0:(Nx/2-1) (-Nx/2):-1]'; 
 kx(1) = 10^(-6);
-%y diresction
+%y direction
 ky = (2*pi/Ly)*[0:(Ny/2-1) (-Ny/2):-1]'; 
 ky(1) = 10^(-6);
 %to give kx and ky the sense of direction
@@ -49,19 +49,22 @@ Kderv = KX.^2+KY.^2;
 
 %option 2: %two same gaussians voticies next to each other which can be
 %made to collide
-w = exp(-2*(X+2).^2-(Y).^2/20) + exp(-2*(X-2).^2-(Y).^2/20); 
+%w = exp(-2*(X+2).^2-(Y).^2/20) + exp(-2*(X-2).^2-(Y).^2/20); 
 
 %option 3: %multiple gaussians
 % w = exp(-2*(X+6).^2-(Y).^2/10) + exp(-2*(X-6).^2-(Y).^2/10)...
 %     +exp(-2*(X).^2-(Y+6).^2/10) + exp(-2*(X).^2-(Y-6).^2/10); 
 
+%option 4: one positive Gaussian and one negative Gaussian
+%w = exp(-2*(X+2).^2-(Y+6).^2/20) - exp(-2*(X-2).^2-(Y+6).^2/20); 
+
 %plot the vorticity
-figure(1)
-pcolor(x,y,abs(w));
-shading interp
-colorbar
-colormap jet
-drawnow %to show the plot right away without waitigng for the code to be 
+% figure(1)
+% pcolor(x,y,abs(w));
+% shading interp
+% colorbar
+% colormap jet
+% drawnow %to show the plot right away without waitigng for the code to be 
 %finished running
 
 
@@ -81,11 +84,12 @@ wt2 = reshape(wt,N,1);
 for j = 1:length(tspan)
     w=ifft2(reshape(wt2sol(j,:),Nx,Ny));
     figure(2)
-    subplot(4,4,j)
+    %subplot(4,4,j)
     pcolor(x,y,real(w));
     shading interp
     colorbar
     colormap jet
+    drawnow
     axis square
     xlabel('x')
     ylabel('y')
