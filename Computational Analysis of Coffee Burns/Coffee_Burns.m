@@ -4,54 +4,6 @@ close all;
 
                     %%%Analytical Solution
 
-%Defining temperatures
-%body
-Tbody_C = 37; %celsius
-Tbody_K = Tbody_C + 273.15; %kelvin
-%coffee temp1
-Tcoffee1_C = 60; %celsius
-Tcoffee1_K = Tcoffee1_C + 273.15; %kelvin
-% %coffee temp2
-% Tcoffee2_C = 82; %celsius
-% Tcoffee2_K = Tcoffee2_C + 273.15; %kelvin
-
-% %space variable
-% L=2; %mm
-% dx=0.05;
-% x = 0:dx:L;
-% 
-% %time variable
-% tmax=4; %sec
-% dt=0.01;
-% t = 0:dt:tmax;
-% 
-% %themral conductivity
-% k1 = 0.209; %W/mK for epidermis
-% %k2 = 0.322; %W/mK for dermis
-% 
-% %analytical solution
-% [X,T] = meshgrid(x,t);
-% U0 = ((Tcoffee1_K-Tbody_K)*X)/L+Tbody_K;
-% tic
-% syms n
-% U = U0 + symsum(2*(Tbody_K-Tcoffee1_K)*((-1)^n)/pi*n.* sin(n*pi*X/L)...
-%     .*exp(-k1*T*(n*pi/L)^2),n,1,1000);
-% toc
-%U = zeros(size(X,1),size(T,2));
-
-% for n = 1:1000
-%      Bn = 2*(Tbody_K-Tcoffee1_K)*((-1)^n)/pi*n;
-%      %Bn = -2*(-1)^n/(n*pi)^2;
-%      Un = Bn .* sin(n*pi*X/L).*exp(-k1*T*(n*pi/L)^2);
-%      U = U0 + Un;
-%      U = U - 273.15;
-% end
-
-%plotting
-%convert to celsius
-
-%figure(2)
-%plot(X,U(1,:),'b',X,U(100,:),'r',X,U(200,:),'g',X,U(300,:),'k',X,U(400,:),'m')
 
 
                     %%%Numerical Solution
@@ -68,15 +20,15 @@ nt = Time/dt; %number of time points
 t = linspace(0,Time,nt); %time variable
 
 %themral conductivity
-k = 0.209; %epidermis dominated effect
-%k = 0.322; %dermis dominated effect
+%k = 0.209; %epidermis dominated effect
+k = 0.322; %dermis dominated effect
 
 %CFL number to ensure stability (less or equal to 0.5)
 CFL = dt/dx^2;
 
 %Define boundary temperatures
 %body temperature 
-Tbody_C = 37; %in celsius
+Tbody_C = 37; %in celsius 
 Tbody_K = Tbody_C + 273.15; %kelvin
 %coffee temperature 1
 % Tcoffee_C = 60; %in celsius
@@ -124,19 +76,16 @@ title(['Thermal conductivity= ', num2str(k), ' and coffee temperature= ', ...
     num2str(Tcoffee_C),' C^0'])
 legend('0 sec','1 sec','2 sec','3 sec','4 sec','Location','NorthWest')
 set(gca,'FontSize',16)
-axis([0 L Tbody_C Tcoffee_C]);
 
-%3D plot
-figure(2)    
-mesh(x,t,Tsol')
-colormap(jet)
-shading interp
-xlabel('Depth (mm)')
-ylabel('Time (Sec)')
-zlabel('Temperature (C^0)')
-colorbar
+figure(2)
+plot(t,Tsol(1,:),'b',t,Tsol(3,:),'r',t,Tsol(6,:),'g',...
+    t,Tsol(8,:),'m',t,Tsol(10,:),'k','LineWidth',2)
+xlabel('Time (sec)')
+ylabel('Temperature (C^0)')
+title(['Thermal conductivity= ', num2str(k), ' and coffee temperature= ', ...
+    num2str(Tcoffee_C),' C^0'])
+legend('0 mm','0.5 mm','1.5 mm','1.75 mm','2 mm','Location','NorthWest')
 set(gca,'FontSize',16)
-
 
 
 
