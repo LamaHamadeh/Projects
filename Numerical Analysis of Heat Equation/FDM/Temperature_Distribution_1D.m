@@ -14,7 +14,7 @@ clear; close all;
 %Spatial variable
 %-----------------
 L=1; %LED's length
-dx=0.01; %spatial step size
+dx=0.2; %spatial step size
 xmin=-L; %minimum boundary
 xmax=L; %maximum boundary 
 N=(xmax-xmin)/dx; %number of spatial points
@@ -23,7 +23,7 @@ x=linspace(xmin,xmax,N); %spatial vector
 
 %Time variable
 %-------------
-dt=0.005;  %time step size
+dt=0.02;  %time step size
 tmin=0; %minimum time
 tmax=1; %maximum time
 nt=(tmax-tmin)/dt; %number of time points
@@ -80,10 +80,11 @@ for i = 1:length(Tem)
     figure(1)
     plot(x,Tem(i,:))
     hold on
+    axis([0 1 0 1])
 end
 
 %contour plot
-figure(2)
-contour(x,tspan,Tem,200)
+% figure(2)
+% contour(x,tspan,Tem,200)
 
 
