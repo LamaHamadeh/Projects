@@ -66,7 +66,6 @@ C = (1/2/delta).*C;
 %Create a meshgrid to let Matlab know the x and y directions
 [X,Y] = meshgrid(x,y);
 % Defining vorticity initial state/condition:
-
 %option 1: %one Gaussian at the centre
 % w0 = exp(-2*X.^2-Y.^2/20); 
 % w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
@@ -81,7 +80,9 @@ w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 %     +exp(-2*(X).^2-(Y+6).^2/10) + exp(-2*(X).^2-(Y-6).^2/10); 
 % w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
-
+%option 4: one positive Gaussian and one negative Gaussian
+%w0 = exp(-2*(X+2).^2-(Y+6).^2/20) - exp(-2*(X-2).^2-(Y+6).^2/20); 
+% w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
                 %%%Iterate and integrate over time %%%
 %ode45
@@ -137,6 +138,19 @@ imagesc(abs(reshape(Omega(267,:),Nx,Nx)))
 axis square
 colormap jet
 
+%all in one plot
+for j = 1:length(tspan)
+    w=abs(reshape(Omega(j,:),Nx,Nx));
+    figure(2)
+    pcolor(x,y,w);
+    shading interp
+    colorbar
+    colormap jet
+    drawnow
+    axis square
+    xlabel('x')
+    ylabel('y')
+end
 
                        %%% Make a video %%%
 %figure;
