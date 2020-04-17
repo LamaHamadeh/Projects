@@ -37,11 +37,11 @@ y=x;
 I = eye(length(D2));
 A = kron(I,D2)+kron(D2,I);
 
-%to calculate the d/dx
+%to calculate the d2/dx2
 %the first derivative of x in 2D
 B = kron(D1,I);
 
-%to calculate the d/dy
+%to calculate the d2/dy2
 %the first derivative of y in 2D
 C = kron(I,D1);
 
