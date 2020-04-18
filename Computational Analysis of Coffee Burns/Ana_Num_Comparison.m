@@ -2,9 +2,7 @@
 clear all;
 close all;
 
-
                     %%%Define Global Parameters
-
 %space 
 L = 2; %skin depth
 dx = 0.2   ; %space step
@@ -89,8 +87,8 @@ end
 Tsol_num = Tsol_num-273.15;
 
 
-                        %%%Comparison
-%Error Estimation
+                        %%%Error Estimation
+%Error
 
 
 
