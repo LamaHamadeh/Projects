@@ -88,9 +88,10 @@ Tsol_num = Tsol_num-273.15;
 
 
                         %%%Error Estimation
-%Error
-
-
+%Root mean square error
+for i = 1:length(t)
+    Error = sqrt(sum((Tsol_num(:,i) - Tsol_ana(:,i)).^2)/numel(x));
+end
 
                         %%%Plotting
                         
