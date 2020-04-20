@@ -88,6 +88,19 @@ Tsol_num = Tsol_num-273.15;
 
 
                         %%%Global Error Estimation of the Numerical Scheme
+
+%Note: if we denote:
+
+%A to be the analytical solution of the partial differential equations
+%D the exact solution of the difference equation
+%N the numerical solution from a computer
+
+%Then we can define:
+
+%Discretisation error = A - D
+%Round-off error = N - D
+%Global error of a numerical scheme = A - N
+
 %Root mean square error
 for i = 1:length(t)
     Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x));
