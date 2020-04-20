@@ -87,10 +87,10 @@ end
 Tsol_num = Tsol_num-273.15;
 
 
-                        %%%Error Estimation
+                        %%%Global Error Estimation of the Numerical Scheme
 %Root mean square error
 for i = 1:length(t)
-    Error = sqrt(sum((Tsol_num(:,i) - Tsol_ana(:,i)).^2)/numel(x));
+    Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x));
 end
 
                         %%%Plotting
