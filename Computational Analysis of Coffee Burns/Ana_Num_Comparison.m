@@ -87,24 +87,30 @@ end
 Tsol_num = Tsol_num-273.15;
 
 
-                        %%%Global Error Estimation of the Numerical Scheme
+                        %%% Global (cumulative) Error Estimation of the Numerical Scheme 
+                        %%% Global Disretisation Error 
 
 %Note: if we denote:
-
 %A to be the analytical solution of the partial differential equations
 %D the exact solution of the difference equation
-%N the numerical solution from a computer
-
+%N the numerical solution from a computer, i.e., iterative solution
 %Then we can define:
-
 %Discretisation error = A - D
 %Round-off error = N - D
 %Global error of a numerical scheme = A - N
 
+%More to this can be found in: %Data-Driven Modelling & Scientific Computing: Methods for Complex Systems & Big Data, J. Nathan Kutz
+%Oxford University Press, 2013, Page 145, 'Error Analysis for Time-Stepping Routines'
+
 %Root mean square error
 for i = 1:length(t)
-    Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x));
+    Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x)); %Here the error is a number
 end
+
+%Or it can be computed as:
+%for i = 1:length(t)
+%    Error = (Tsol_ana(:,i) - Tsol_num(:,i)); %Here the error is a vector
+%end
 
                         %%%Plotting
                         
