@@ -35,4 +35,4 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 
 ***PCA and Spring-Mass Systems***: Here 
 
-***Finite Elemtn Analysis of a Flow Over an Airfoil***: Here 
+***Finite Element Analysis of a Flow Over an Airfoil***: Here 
