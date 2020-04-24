@@ -34,3 +34,5 @@ To do this, we will use MATLAB to numerically simulate this.
 Skin burns could be approximated to a simple 1D heat transfer method if the exposed surface is very large as compared to the burn penetration depth. This allows for studying heat flow in one dimension, i.e., dependent on the depth only. This project aims to solve the 1D heat transfer equation analytically with non-homogeneous boundary conditions and then interpret the behaviour of a bio-heat transfer by sovlving it numerically using Forward Euler Method by writing a code in MATLAB.   
 
 ***PCA and Spring-Mass Systems***: Here 
+
+***Finite Elemtn Analysis of a Flow Over an Airfoil***: Here 
