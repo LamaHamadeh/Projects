@@ -59,3 +59,8 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 ***Finite Element Analysis of a Flow Over an Airfoil***: The airplane generates lift using its wings. The cross-sectional shape of the wing is called an airfoil.  
 
 -------------------------------------------------------------
+
+***Chaos in Ordinary Differential Equations***
+
+-------------------------------------------------------------
+
