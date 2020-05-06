@@ -52,6 +52,10 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 
 -------------------------------------------------------------
 
+***Chaos in Ordinary Differential Equations***
+
+-------------------------------------------------------------
+
 ***PCA and Spring-Mass Systems***: Here 
 
 -------------------------------------------------------------
@@ -60,7 +64,5 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 
 -------------------------------------------------------------
 
-***Chaos in Ordinary Differential Equations***
 
--------------------------------------------------------------
 
