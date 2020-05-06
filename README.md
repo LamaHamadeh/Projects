@@ -52,7 +52,7 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 
 -------------------------------------------------------------
 
-***Chaos in Ordinary Differential Equations***
+***Chaos in Ordinary Differential Equations***: Dynamical nonlinear models in physical sciences and engineering systems that exhibit chaotic behavior are sensitive to initial conditions. Although these systems are deterministic through some description by mathematical rules, the behavior of chaotic systems appears to be random due to their sensitivity to initial conditions. Chaotic behavior can be observed in a variety of systems such as electrical circuits, lasers, fluid dynamics, mechanical devices, time evolution of the magnetic field of celestial bodies, population growth in ecology, the dynamics of molecular vibrations and not forgetting the weather. One of the many chaotic systems discovered in the past is the Lorenz system.It was developed by by Edward Lorenz in 1963 when he was investigating a simplified model of atmospheric convection. It is a nonlinear system of three differential equations with three parameters. The Lorenz system can exhibit both caotic and non-caotic behaviour for distinct parameter values. In this project, we will look at this system in MATLAB and see how a little perturbation to the initial condition can affect the overall behaviour of the system. 
 
 -------------------------------------------------------------
 
