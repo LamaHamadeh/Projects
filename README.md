@@ -56,6 +56,12 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 
 -------------------------------------------------------------
 
+***Double-Gyre Flow***: The world oceans are an important constituent of our climate system. They account for a significant fraction
+of the poleward heat transport and are the main sources of long timescales in climate dynamics. The dynamics of ocean circulation are, therefore, expected to play a major role in climate variability. However, even the response of the oceans themselves to specified mechanical and thermodynamic forcings — wind-driven circulation and thermohaline circulation respectively— is, in general, very complicated. While simple models are useful in understanding various individual features of this complicated response, realistic descriptions invariably require the use of ocean general circulation models. Lagrangian trajectories in a deterministic simple flow can exhibit complex behavior. This is called the chaotic advection, which can induce the chaotic transport and mixing (which oceanographers conventionally call stirring) in the fluid particles and fine structure in the tracer fields. The double gyre is a simple two-dimensional model that is often used to study mixing between ocean basins. In this project, we will use MATLAB to simulate the double-gyre behaviour and the corresponding change in the vector field.
+
+
+-------------------------------------------------------------
+
 ***PCA and Spring-Mass Systems***: Here 
 
 -------------------------------------------------------------
