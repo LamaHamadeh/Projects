@@ -24,6 +24,9 @@ a heat in a given region over time. This equation can describes many natural sci
 1-Finite Difference Method  
 2-Fourier Transform  
 3-Chebychev Spectral Differentiation   
+Heat Equation Dervation helpful links: 
+https://www.youtube.com/watch?v=IplgGeivmpk&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=36
+https://www.youtube.com/watch?v=hLNyvp6MrXs&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=37
 
 -------------------------------------------------------------
 
@@ -49,6 +52,9 @@ To do this, we will use MATLAB to numerically simulate this.
 3- Third degree (ful thickness) burns: These burns extend through the dermis and into the hypodermis. The burns side appears patchy and colour ranging from white to brown with a dry lethery texture. Becasue the burn is so deep, it casues little or no pain.  
 4- Fourth degree burns: These burns involve the destruction of all layers of the skin. These burns are brown, dry and almost always painless.   
 Skin burns could be approximated to a simple 1D heat transfer method if the exposed surface is very large as compared to the burn penetration depth. This allows for studying heat flow in one dimension, i.e., dependent on the depth only. This project aims to solve the 1D heat transfer equation analytically with non-homogeneous boundary conditions and then interpret the behaviour of a bio-heat transfer by sovlving it numerically using Forward Euler Method by writing a code in MATLAB.   
+Heat Equation Dervation helpful links: 
+https://www.youtube.com/watch?v=IplgGeivmpk&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=36
+https://www.youtube.com/watch?v=hLNyvp6MrXs&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=37
 
 -------------------------------------------------------------
 
