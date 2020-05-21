@@ -88,29 +88,24 @@ Tsol_num = Tsol_num-273.15;
 
 
                         %%% Global (cumulative) Error Estimation of the Numerical Scheme 
-                        %%% Global Disretisation Error 
+                        %%% Global Disretisation Error (Error = Ana(i) - num(i)) where i is the time step
 
 %Note: if we denote:
+
 %A to be the analytical solution of the partial differential equations
 %D the exact solution of the difference equation
 %N the numerical solution from a computer, i.e., iterative solution
+
 %Then we can define:
+
 %Discretisation error = A - D
 %Round-off error = N - D
 %Global error of a numerical scheme = A - N
 
-%More to this can be found in: %Data-Driven Modelling & Scientific Computing: Methods for Complex Systems & Big Data, J. Nathan Kutz
-%Oxford University Press, 2013, Page 145, 'Error Analysis for Time-Stepping Routines'
-
 %Root mean square error
 for i = 1:length(t)
-    Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x)); %Here the error is a number
+    Error = sqrt(sum((Tsol_ana(:,i) - Tsol_num(:,i)).^2)/numel(x));
 end
-
-%Or it can be computed as:
-%for i = 1:length(t)
-%    Error = (Tsol_ana(:,i) - Tsol_num(:,i)); %Here the error is a vector
-%end
 
                         %%%Plotting
                         
@@ -132,7 +127,7 @@ legend('0 sec Analytical','0 sec Numerical',...
     '4 sec Analytical','4 sec Numerical',...
     'Location','NorthWest')
 set(gca,'FontSize',16)
-%for different depths
+%for different spatial depths
 figure(2)
 plot(t,Tsol_ana(1,:),'b',t,Tsol_num(1,:),'bo',...
     t,Tsol_ana(6,:),'r',t,Tsol_num(6,:),'ro',...
@@ -146,7 +141,26 @@ legend('0 mm Analytical','0 mm Numerical',...
     '2 mm Analytical','2 mm Numerical',...
     'Location','NorthWest')
 set(gca,'FontSize',16)
-
-
-
+% Plot imagesc plots
+figure(3)
+%analytical solution
+subplot(1,2,1)
+imagesc(Tsol_ana)
+colorbar;
+axis square
+title('Analytical')
+xlabel('Time')
+ylabel('Depth')
+set(gca,'FontSize',14)
+colormap summer
+%numerical solution
+subplot(1,2,2)
+imagesc(Tsol_num)
+colorbar;
+axis square 
+title('Numerical')
+xlabel('Time')
+ylabel('Depth')
+set(gca,'FontSize',14)
+colormap summer
 
