@@ -43,7 +43,9 @@ Tn = @(n,x,t,k,Tbody_K,Tcoffee_K) C_n(Tbody_K,Tcoffee_K,n).*sin(n*pi*x/L).*exp(-
 %initialise the sum to zero
 Tsum = zeros(size(C_0(Tcoffee_K,Tbody_K,X)));
 %use definite loop instead of indefinite sum
-for i=1:1000
+%Define the number of Fourier modes
+modes = 1000;
+for i=1:modes
     Tsum = Tsum + Tn(i,X,T,k,Tbody_K,Tcoffee_K);%computing the sum
 end
 
