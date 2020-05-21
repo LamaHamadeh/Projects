@@ -55,6 +55,8 @@ Skin burns could be approximated to a simple 1D heat transfer method if the expo
 Heat Equation Dervation helpful links:   
 https://www.youtube.com/watch?v=IplgGeivmpk&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=36
 https://www.youtube.com/watch?v=hLNyvp6MrXs&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=37
+For solving Laplace Equation analytically:
+https://www.youtube.com/watch?v=z2F9dbvK0Ws&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j&index=38
 
 -------------------------------------------------------------
 
