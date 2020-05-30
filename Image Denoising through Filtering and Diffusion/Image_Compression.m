@@ -4,10 +4,8 @@ close all;
 clear all;
 
 %read image
-%A = imread('Photo','jpeg'); %Glaxo Smith Kline Carbon Neutral Laboratory for Sustainable Chemistry
+%A = imread('GSK','jpeg'); %Glaxo Smith Kline Carbon Neutral Laboratory for Sustainable Chemistry (UoN)
 A = imread('Arkwright','png'); %Arkwright Building (NTU)
-nx = size(A,1);
-ny = size(A,2);
 %plotting
 subplot(2,3,1)
 image(A)
