@@ -35,7 +35,7 @@ legend('Function','True Derivative','Finite Difference','FFT Derivative')
 %reason behnind FD is less accurat than FFT
 % small neighbour of points around where I'm taking the derivative
 % and I am estimating what the curvature (the derivative) is around
-% these piints. 
+% these points. 
 % If I use larger and larger radius of points, I'll get more and more
 % accurate shceme. 
 %However, in the spectral scheme, FFT, for each frequncy I have a 
