@@ -24,26 +24,44 @@ a = 1;
 %define the diffusion time step
 dt = 0.1;
 
-%Define the wave vector
-k = (2*pi/L)*[0:(N/2-1) (-N/2):-1]; 
-%k(1) = 10^(-6);
-
 %solve the 1D diffusion equation as a function of time.
 Time = 100;
 
-for i = 0:Time     
-    t = i*dt; %increase by one time step   
+for i = 0:Time 
+    
+    t = i*dt; %increase by one time step
+    
+    %method 1
     %Fast Fourier transform of the function f
     fhat = fft(f);
-    uhat = fftshift(fhat.*exp(-(a^2)*t*k.^2));    
+    %Define the wave vector
+    k1 = (2*pi/L)*[-N/2:N/2-1]; 
+    k1 = fftshift(k1);
+    uhat = fhat.*exp(-(a^2)*t*k1.^2);
     %inverse of FT to the shifted function
-    u = ifft(uhat);    
+    u1 = ifft(uhat);
     %plotting
-    plot(x,abs(u),'k') %the absolute value of the function
+    plot(x,u1,'b')
+    hold on
+    
+    %method 2
+    %Fast Fourier transform of the function f
+    fhat = fft(f);
+     %Define the wave vector
+    k2 = (2*pi/L)*[0:(N/2-1) (-N/2):-1]; %different than the previously defined k
+    %k(1) = 10^(-6);
+    uhat = fftshift(fhat.*exp(-(a^2)*t*k2.^2));   
+    %inverse of FT to the shifted function
+    u2 = ifft(uhat);
+    %plotting
+    plot(x,abs(u2),'r--')
+
     xlabel('Spatial variable, x')
     ylabel('Temperature, u(x,t)')
     title(['Time, t=',num2str(t)])
     axis([-15 15 -.1 1.1])
+    hold off
+
     pause(0.1)
 end
 
