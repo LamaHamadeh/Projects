@@ -1,7 +1,10 @@
 
-function rhs = FFT_rhs(tspan,Ut2,dummy, KX, KY,D)
+function rhs = FFT_rhs(tspan,Ut,dummy, KX, KY)
 
-rhs = -D.*(KX.^2+KY.^2).*Ut2;
+%diffusion coeffieicnt
+D = 0.01;
+
+rhs = -D.*(KX.^2+KY.^2).*Ut;
 
 end
 
