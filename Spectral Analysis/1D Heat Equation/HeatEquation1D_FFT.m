@@ -38,7 +38,7 @@ set(gca,'FontSize',16)
 % title('Initial Square function')
 % set(gca,'FontSize',16)
 %--------------------------
-                    %%% 2D Wave vector disretisation %%%
+                    %%% 1D Wave vector disretisation %%%
                    
 %x direction
 k = (2*pi/L)*[0:(N/2-1) (-N/2):-1]'; 
