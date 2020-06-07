@@ -19,7 +19,7 @@ sigma = 0.5;
 U = exp(-x.^2/sigma^2); %Gaussian
 %plotting
 figure(1)
-plot(x,abs(U));
+plot(x,U);
 xlabel('x')
 ylabel('U(x)')
 title('Initial Gaussian function')
@@ -58,6 +58,7 @@ tspan = [tmin tmax];
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
     Sol = ifft(ifftshift(Sol(TimeIteration,:))); 
+    figure(2)
     plot(x,real(Sol));
     xlabel('$x$','Interpreter','latex')
     ylabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
@@ -68,6 +69,19 @@ tspan = [tmin tmax];
     txt = {['t = ' num2str(t)]};
     text(1,1,txt,'FontSize',16)
     drawnow;
-    pause(0.1)
+    
+    figure(3)
+    waterfall(x,t,real(Sol))
+    map = [0 0 0];
+    colormap(map);
+    xlim ([-L L])
+    ylim ([0 10])
+    zlim ([-1 1])
+    xlabel('$x$','Interpreter','latex')
+    ylabel('$y$','Interpreter','latex')
+    zlabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
+    drawnow;
+    
+    %pause(0.1)
  end
     %--------------------------
