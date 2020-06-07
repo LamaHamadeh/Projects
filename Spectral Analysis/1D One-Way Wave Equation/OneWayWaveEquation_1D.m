@@ -19,9 +19,9 @@ sigma = 0.5;
 U = exp(-x.^2/sigma^2); %Gaussian
 %plotting
 figure(1)
-plot(x,U);
-xlabel('x')
-ylabel('U(x)')
+plot(x,U,'b','LineWidth',2);
+xlabel('$x$','Interpreter','latex')
+ylabel('$U(x)$','Interpreter','latex')
 title('Initial Gaussian function')
 set(gca,'FontSize',16)
 %--------------------------
@@ -52,36 +52,63 @@ tspan = [tmin tmax];
 % %--------------------------
 % 
 %                 %%%Iterate and integrate over time %%%
-%    
+
  for TimeIteration = 1:100
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
+    %inverse of FT
     Sol = ifft(ifftshift(Sol(TimeIteration,:))); 
+    %plotting
     figure(2)
-    plot(x,real(Sol));
+    %real solution
+    subplot(2,2,1)
+    plot(x,real(Sol),'b','LineWidth',2);
     xlabel('$x$','Interpreter','latex')
     ylabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
     ylim ([-1.5 1.5])
     xlim ([-3 3])
-    title('Spectral Solution of the 1D One-Way Wave Equation')
     set(gca,'FontSize',16)
-    txt = {['t = ' num2str(t)]};
-    text(1,1,txt,'FontSize',16)
-    drawnow;
-    
-    figure(3)
-    waterfall(x,t,real(Sol))
-    map = [0 0 0];
-    colormap(map);
-    xlim ([-L L])
-    ylim ([0 10])
-    zlim ([-1 1])
+%     txt = {['t = ' num2str(t)]};
+%     text(1,1,txt,'FontSize',16)
+    title({'Real Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
+    axis square
+    %absolute solution
+    subplot(2,2,2)
+    plot(x,abs(Sol),'r','LineWidth',2);
     xlabel('$x$','Interpreter','latex')
-    ylabel('$y$','Interpreter','latex')
+    ylabel('$|{U(x,t)|}$','Interpreter','latex')
+    ylim ([-1.5 1.5])
+    xlim ([-3 3])
+    set(gca,'FontSize',16)
+%     txt = {['t = ' num2str(t)]};
+%     text(1,1,txt,'FontSize',16)
+    title({'Absolute Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
+    axis square
+    %real solution
+    subplot(2,2,3)
+    waterfall(x,t,real(Sol))
+    xlabel('$x$','Interpreter','latex')
+    ylabel('$t$','Interpreter','latex')
     zlabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
+    colormap jet
+    colorbar
+    set(gca,'FontSize',16)
+    axis square
+    hold on
+    %absolute solution
+    subplot(2,2,4)
+    waterfall(x,t,abs(Sol))
+    xlabel('$x$','Interpreter','latex')
+    ylabel('$t$','Interpreter','latex')
+    zlabel('$|{U(x,t)|}$','Interpreter','latex')
+    colormap jet
+    colorbar
+    set(gca,'FontSize',16)
+    axis square
+    hold on
+   
     drawnow;
-    
-    %pause(0.1)
+
  end
     %--------------------------
