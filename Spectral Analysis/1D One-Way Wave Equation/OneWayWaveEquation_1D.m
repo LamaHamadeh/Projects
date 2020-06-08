@@ -16,7 +16,8 @@ x=linspace(xmin,xmax,N); %spatial vector
 
 %Gaussian
 sigma = 0.5;
-U = exp(-x.^2/sigma^2); %Gaussian
+%U = exp(-x.^2/sigma^2); %Gaussian
+U = sech(2*x); %Hyperbolic function
 %plotting
 figure(1)
 plot(x,U,'b','LineWidth',2);
