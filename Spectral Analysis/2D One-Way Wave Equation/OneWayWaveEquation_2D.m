@@ -101,9 +101,10 @@ tspan = [tmin tmax];
     xlim ([0 80]);
     ylim ([0 80]);
     zlim ([0, 1]); %This is very important so we can lock the zoom-in behaviour on the z axis
+    set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
-    txt = {['t = ' num2str(t)]};
-    text(60,20,0.8,txt,'FontSize',16)
+%     txt = {['t = ' num2str(t)]};
+%     text(60,20,0.8,txt,'FontSize',16)
     %imagesc
     subplot(1,2,2)
     imagesc(abs(Sol));
@@ -115,9 +116,11 @@ tspan = [tmin tmax];
     ylabel('$y$','Interpreter','latex')
     xlim ([0 80]);
     ylim ([0 80]);
+    set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
     
-    suptitle('Spectral Solution of the 2D One-Way Wave Equation')
+    suptitle({'Spectral Solution of the 2D One-Way Wave Equation','',['t = ' num2str(t)]})    
+    
     drawnow;  
     
  end
