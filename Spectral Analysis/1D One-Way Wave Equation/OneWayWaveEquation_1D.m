@@ -22,6 +22,7 @@ figure(1)
 plot(x,U,'b','LineWidth',2);
 xlabel('$x$','Interpreter','latex')
 ylabel('$U(x)$','Interpreter','latex')
+set(gca,'TickLabelInterpreter','latex')
 title('Initial Gaussian function')
 set(gca,'FontSize',16)
 %--------------------------
@@ -68,6 +69,7 @@ tspan = [tmin tmax];
     ylabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
     ylim ([-1.5 1.5])
     xlim ([-3 3])
+    set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
 %     txt = {['t = ' num2str(t)]};
 %     text(1,1,txt,'FontSize',16)
@@ -80,6 +82,7 @@ tspan = [tmin tmax];
     ylabel('$|{U(x,t)|}$','Interpreter','latex')
     ylim ([-1.5 1.5])
     xlim ([-3 3])
+    set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
 %     txt = {['t = ' num2str(t)]};
 %     text(1,1,txt,'FontSize',16)
@@ -91,6 +94,7 @@ tspan = [tmin tmax];
     xlabel('$x$','Interpreter','latex')
     ylabel('$t$','Interpreter','latex')
     zlabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
+    set(gca,'TickLabelInterpreter','latex')
     colormap jet
     colorbar
     set(gca,'FontSize',16)
@@ -102,12 +106,13 @@ tspan = [tmin tmax];
     xlabel('$x$','Interpreter','latex')
     ylabel('$t$','Interpreter','latex')
     zlabel('$|{U(x,t)|}$','Interpreter','latex')
+    set(gca,'TickLabelInterpreter','latex')
     colormap jet
     colorbar
     set(gca,'FontSize',16)
     axis square
     hold on
-   
+    
     drawnow;
 
  end
