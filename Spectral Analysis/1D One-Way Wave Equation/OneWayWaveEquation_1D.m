@@ -17,7 +17,7 @@ x=linspace(xmin,xmax,N); %spatial vector
 %Gaussian
 sigma = 0.5;
 %U = exp(-x.^2/sigma^2); %Gaussian
-U = sech(2*x); %Hyperbolic function
+U = sech(5*x); %Hyperbolic
 %plotting
 figure(1)
 plot(x,U,'b','LineWidth',2);
@@ -39,7 +39,7 @@ k = reshape(k,N,1);
                     %%% Fast Fourier Transform %%%
                     
 %FT+shift of the initial condition
-Ut = fftshift(fft(U));   
+Ut = (fft(U));   
 %stacked data to a coloumn to be passed later to ode45
 Ut = reshape(Ut,N,1);
 % %--------------------------
@@ -55,7 +55,9 @@ tspan = [tmin tmax];
 % 
 %                 %%%Iterate and integrate over time %%%
 
- for TimeIteration = 1:100
+DATA = zeros(length(U),100); %initialise the data matrix
+
+ for TimeIteration = 1:1:100
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
@@ -63,22 +65,9 @@ tspan = [tmin tmax];
     Sol = ifft(ifftshift(Sol(TimeIteration,:))); 
     %plotting
     figure(2)
-    %real solution
-    subplot(2,2,1)
-    plot(x,real(Sol),'b','LineWidth',2);
-    xlabel('$x$','Interpreter','latex')
-    ylabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
-    ylim ([-1.5 1.5])
-    xlim ([-3 3])
-    set(gca,'TickLabelInterpreter','latex')
-    set(gca,'FontSize',16)
-%     txt = {['t = ' num2str(t)]};
-%     text(1,1,txt,'FontSize',16)
-    title({'Real Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
-    axis square
     %absolute solution
-    subplot(2,2,2)
-    plot(x,abs(Sol),'r','LineWidth',2);
+    subplot(1,2,1)
+    plot(x,abs(Sol),'b','LineWidth',2);
     xlabel('$x$','Interpreter','latex')
     ylabel('$|{U(x,t)|}$','Interpreter','latex')
     ylim ([-1.5 1.5])
@@ -87,22 +76,9 @@ tspan = [tmin tmax];
     set(gca,'FontSize',16)
 %     txt = {['t = ' num2str(t)]};
 %     text(1,1,txt,'FontSize',16)
-    title({'Absolute Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
     axis square
-    %real solution
-    subplot(2,2,3)
-    waterfall(x,t,real(Sol))
-    xlabel('$x$','Interpreter','latex')
-    ylabel('$t$','Interpreter','latex')
-    zlabel('$\mathrm{Re}\{U(x,t)\}$','Interpreter','latex')
-    set(gca,'TickLabelInterpreter','latex')
-    colormap jet
-    colorbar
-    set(gca,'FontSize',16)
-    axis square
-    hold on
-    %absolute solution
-    subplot(2,2,4)
+    
+    subplot(1,2,2)
     waterfall(x,t,abs(Sol))
     xlabel('$x$','Interpreter','latex')
     ylabel('$t$','Interpreter','latex')
@@ -110,11 +86,40 @@ tspan = [tmin tmax];
     set(gca,'TickLabelInterpreter','latex')
     colormap jet
     colorbar
-    set(gca,'FontSize',16)
     axis square
+    ylim ([0 10])
+    xlim ([-2 2])
+
+    suptitle({'Absolute Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
+    set(gca,'FontSize',16)
+    
     hold on
     
     drawnow;
-
+    
+    DATA(:,TimeIteration) = abs(Sol); %store the data at each iteration
  end
-    %--------------------------
+
+%plot the 2D data
+figure(3)
+subplot(1,2,1)
+pcolor(DATA)
+shading interp
+colormap jet
+axis square
+xlabel('$t$','Interpreter','latex')
+ylabel('$x$','Interpreter','latex')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+subplot(1,2,2)
+surf(DATA)
+shading interp
+colormap jet
+axis square
+xlabel('$t$','Interpreter','latex')
+ylabel('$x$','Interpreter','latex')
+zlabel('$|{U(x,t)|}$','Interpreter','latex')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+
+%--------------------------
