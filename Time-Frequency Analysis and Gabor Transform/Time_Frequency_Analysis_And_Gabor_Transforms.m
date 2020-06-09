@@ -78,7 +78,7 @@ Sg = g.*S;
 Sgt = fft(Sg);
 
 %stor the spectrogram data at each iteration
-Sgt_spec = [Sgt_spec;abs(fftshift(Sgt))/max(abs(Sgt))]; %matrix of spectrogram
+Sgt_spec = [Sgt_spec;abs(fftshift(Sgt))/max(abs(fftshift(Sgt)))]; %matrix of spectrogram
 %with rows to the time snapshots and coloums of Gabor signal
 
 %plotting
@@ -99,7 +99,7 @@ set(gca,'FontSize',16)
 ylim([-1 1])
 %the normalised resulting signal in frequency domain
 subplot(3,1,3)
-plot(ks,abs(fftshift(Sgt))/max(abs(Sgt)))
+plot(ks,abs(fftshift(Sgt))/max(abs(fftshift(Sgt))))
 %axis([-50 50 0 1])
 title('Fourier Transofrm of the new signal in frequency domain')
 set(gca,'TickLabelInterpreter','latex')
