@@ -5,7 +5,7 @@ clear all;
                 %%% Define 2D Discretised spatial %%%            
 
 %Spatial variable on x direction
-Lx=2; %domain on x
+Lx=1; %domain on x
 delta=0.05; %spatial step size
 xmin=-Lx; %minimum boundary
 xmax=Lx; %maximum boundary 
@@ -13,7 +13,7 @@ Nx=(xmax-xmin)/delta; %number of spatial points
 x=linspace(xmin,xmax,Nx); %spatial vector
 
 %Spatial variable on y direction
-Ly=2; %domain on y
+Ly=1; %domain on y
 delta=0.05; %spatial step size
 ymin=-Ly; %minimum boundary
 ymax=Ly; %maximum boundary 
@@ -29,20 +29,22 @@ N = (Nx * Ny);
 %initial consitions
 [X,Y] = meshgrid(x,y); %Nx X Ny grid
 %Gaussian
-sigma = 0.5;
+sigma = 0.2;
 %U = exp((-X.^2-Y.^2)/sigma^2); %Gaussian at the centre (0,0)
-U = exp((-(X-1).^2-(Y-1).^2)/sigma^2); %Gaussian at the edge centered at (1,1)
-% %plotting
-% figure(1)
-% surfl(X,Y,U);
-% shading interp
-% colorbar, colormap gray
-% xlabel('$x$','Interpreter','latex')
-% ylabel('$y$','Interpreter','latex')
-% zlabel('$U(x,t=0)$','Interpreter','latex')
-% title('Initial Gaussian function')
-% drawnow
-% set(gca,'FontSize',16)
+U = exp((-(X-0.5).^2-(Y-0.5).^2)/sigma^2); %Gaussian at the edge centered at (1,1)
+%plotting
+figure(1)
+surfl(X,Y,U);
+shading interp
+colorbar, colormap gray
+xlabel('$x$','Interpreter','latex')
+ylabel('$y$','Interpreter','latex')
+zlabel('$U(x,t=0)$','Interpreter','latex')
+title('Initial Gaussian function')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+drawnow
+
 %--------------------------
 
                     %%% 2D Wave vector disretisation %%%
@@ -50,9 +52,11 @@ U = exp((-(X-1).^2-(Y-1).^2)/sigma^2); %Gaussian at the edge centered at (1,1)
 %x direction
 kx = (2*pi/Lx)*[0:(Nx/2-1) (-Nx/2):-1]'; 
 kx(1) = 10^(-6);
+kx = fftshift(kx);
 %y diresction
 ky = (2*pi/Ly)*[0:(Ny/2-1) (-Ny/2):-1]'; 
 ky(1) = 10^(-6);
+ky = fftshift(ky);
 %to give kx and ky the sense of direction
 [KX,KY] = meshgrid(kx,ky); %N X N grid
 
@@ -80,12 +84,12 @@ tspan = [tmin tmax];
 
                 %%%Iterate and integrate over time %%%
    
- for TimeIteration = 1:100
+ for TimeIteration = 1:10:400
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_2D',tspan,Ut,[], KX, KY);
     %inverse of FT
-    Sol = ifft2(ifftshift(reshape(Sol(TimeIteration,:),Nx,Nx))); 
+    Sol = ifft2(reshape(Sol(TimeIteration,:),Nx,Nx)); 
     %plotting
     figure(2)
     %surfl
@@ -98,8 +102,8 @@ tspan = [tmin tmax];
     xlabel('$x$','Interpreter','latex')
     ylabel('$y$','Interpreter','latex')
     zlabel('$|U(x,t)|$','Interpreter','latex')
-    xlim ([0 80]);
-    ylim ([0 80]);
+    xlim ([0 40]);
+    ylim ([0 40]);
     zlim ([0, 1]); %This is very important so we can lock the zoom-in behaviour on the z axis
     set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
@@ -114,12 +118,14 @@ tspan = [tmin tmax];
     axis square
     xlabel('$x$','Interpreter','latex')
     ylabel('$y$','Interpreter','latex')
-    xlim ([0 80]);
-    ylim ([0 80]);
+    xlim ([0 40]);
+    ylim ([0 40]);
     set(gca,'TickLabelInterpreter','latex')
+    title('$|U(x,t)|$','Interpreter','latex')
     set(gca,'FontSize',16)
     
-    suptitle({'Spectral Solution of the 2D One-Way Wave Equation','',['t = ' num2str(t)]})    
+    suptitle({'Spectral Solution of the 2D One-Way Wave Equation','',['t = ' num2str(t)]})
+    
     
     drawnow;  
     
