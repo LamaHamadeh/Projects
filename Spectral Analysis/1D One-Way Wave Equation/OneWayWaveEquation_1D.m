@@ -32,6 +32,7 @@ set(gca,'FontSize',16)
 %x direction
 k = (2*pi/L)*[0:(N/2-1) (-N/2):-1]'; 
 k(1) = 10^(-6);
+k = fftshift(k);
 %convert to columns so they can pass to ode45
 k = reshape(k,N,1);
 % %--------------------------
@@ -39,7 +40,7 @@ k = reshape(k,N,1);
                     %%% Fast Fourier Transform %%%
                     
 %FT+shift of the initial condition
-Ut = (fft(U));   
+Ut = fftshift(fft(U));   
 %stacked data to a coloumn to be passed later to ode45
 Ut = reshape(Ut,N,1);
 % %--------------------------
@@ -57,12 +58,12 @@ tspan = [tmin tmax];
 
 DATA = zeros(length(U),100); %initialise the data matrix
 
- for TimeIteration = 1:1:100
+ for TimeIteration = 1:100
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
     %inverse of FT
-    Sol = ifft(ifftshift(Sol(TimeIteration,:))); 
+    Sol = ifft(Sol(TimeIteration,:)); 
     %plotting
     figure(2)
     %absolute solution
@@ -94,7 +95,6 @@ DATA = zeros(length(U),100); %initialise the data matrix
     set(gca,'FontSize',16)
     
     hold on
-    
     drawnow;
     
     DATA(:,TimeIteration) = abs(Sol); %store the data at each iteration
