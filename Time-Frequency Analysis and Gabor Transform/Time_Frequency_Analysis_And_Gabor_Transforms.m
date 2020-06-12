@@ -57,19 +57,19 @@ tslide = 0:0.1:L;
 for j=1:length(tslide)
 
 %Gabor Transform/window function
-%option1
-%g = exp(-(t-tslide(j)).^2); 
-%option2: boarder window funciton
-%g = exp(-0.2*(t-tslide(j)).^2);
-%option3: narrower window funciton
-g = exp(-5*(t-tslide(j)).^2);
+width = 5;
+g = exp(-width*(t-tslide(j)).^2);
 
-%The broader the window, we have more accurate on frequency content 
+%The broader the window/filter, we have more accurate on frequency content 
 %at the sacrifice of less accurate localisation on where the signal is in
 %time. So, we can trust the information along the Y domain rather than the
-%informtion o the X domain.
+%informtion o the X domain. For broad window we get the low frequency component
+%that narrow filter usually throws them out becasue low frequency components are 
+%not locaslised in time.
+
 %the narrower the window, we have more accurate information on the time
-%domain (time localisation) and less information on the frequency.
+%domain (time localisation) and less information on the frequency, i.e., poor frequency
+%resolution. In this kind of filters, a lot of frequency components are thrown away.
 
 %Gabor Signal
 Sg = g.*S; 
