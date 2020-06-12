@@ -37,10 +37,10 @@ hold on
 k = (2*pi./L).*[0:n/2-1 -n/2:-1];
 ks = fftshift(k); %Fourier shift
 %Fourier Transform of the signal
-St = fftshift(fft(S));
+St = fft(S);
 %plotting
 subplot(2,1,2)
-plot(ks,abs(St)/max(abs(St))); %normalised
+plot(ks,abs(fftshift(St))/max(abs(fftshift(St)))); %normalised
 title('Signal in frequency domain')
 xlabel('Frequency')
 set(gca,'TickLabelInterpreter','latex')
@@ -122,3 +122,21 @@ title('Amplitude of a particular frequency at a particular time')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 
+%on top of each other: signal and sectrogram:
+figure
+subplot(2,1,1)
+plot(t,S)
+xlim([0 L])
+xlabel('Time')
+ylabel('Amplitude')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+subplot(2,1,2)
+pcolor(tslide,ks,Sgt_spec')
+shading interp
+colormap jet
+xlim([0 L])
+xlabel('Time')
+ylabel('Frequency')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
