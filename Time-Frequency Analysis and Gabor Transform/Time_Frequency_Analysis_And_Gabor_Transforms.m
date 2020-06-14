@@ -23,6 +23,15 @@ S = (3*sin(2*t)+0.5*tanh(0.5*(t-3))+0.2*exp(-(t-4).^2)+1.5*sin(5*t)+4*cos(3*(t-6
 % [y,fs] = audioread('BoothBabyMantell.wav');
 % %sound(y,fs);
 % S = y(1:n)';
+%----------
+%option4: read Excel file
+% %read the dataset from the Excel file
+% Data = xlsread('Spectrum Data_1.xlsx'); %the size of the dataset is 1698x2
+% 
+% %define the time (first column of the dataset)
+% t = Data(:,1)'; %transpose it to a row vector
+% %define data/signal (second column of the dataset)
+% S = Data(:,2)'; %transpose it to a row vector
 %Data pre-processing
 % %centering the data
 % dsdt = diff(S(:))./diff(t(:));
