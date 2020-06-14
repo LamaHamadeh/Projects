@@ -11,16 +11,37 @@ n = 2048;
 t2 = linspace(0,L,n+1);
 t = t2(1:n);
 %Define signal
-%arbitirary function/signal
+%optione1: arbitirary function/signal
 S = (3*sin(2*t)+0.5*tanh(0.5*(t-3))+0.2*exp(-(t-4).^2)+1.5*sin(5*t)+4*cos(3*(t-6).^2))/10+(t/20).^3;
-%Quadratic Chirp signal
+%----------
+%option2: Quadratic Chirp signal
 % f0 = 50;
 % f1 = 250;
 % S = cos(2*pi*t.*(f0+(f1-f0)*t.^2/(3*L^2)));
-% %electric guitar solo (audio file)
+%----------
+%option3: electric guitar solo (audio file)
 % [y,fs] = audioread('BoothBabyMantell.wav');
 % %sound(y,fs);
 % S = y(1:n)';
+%Data pre-processing
+% %centering the data
+% dsdt = diff(S(:))./diff(t(:));
+% %rescaling
+% mindsdt  = min(dsdt(:));
+% maxdsdt  = max(dsdt(:));
+% meandsdt = mean(dsdt(:));
+% stddsdt  = std(dsdt(:));
+% %rescale data from 0 to 1
+% %Da1 = (Da - minDa)/(maxDa - minDa);
+% %rescale data from -1 to 1
+% dsdt2 = (dsdt - meandsdt)./stddsdt;
+% maxdsdt2 = max(dsdt2(:));
+% dsdt2 = dsdt2/maxdsdt2;
+% S = dsdt2';
+% %Add new column
+% S = [0 S];
+%----------
+
 %plotting the signal
 figure(1)
 subplot(2,1,1)
@@ -42,7 +63,8 @@ St = fft(S);
 subplot(2,1,2)
 plot(ks,abs(fftshift(St))/max(abs(fftshift(St)))); %normalised
 title('Signal in frequency domain')
-xlabel('Frequency')
+xlabel('Frequency (Hz)')
+ylabel('Intensity')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 
@@ -87,20 +109,22 @@ figure(2)
 subplot(3,1,1)
 plot(t,S,'k',t,g,'r')
 title('Signal with Gabor function in time domain')
-xlabel('Time')
+xlabel('Time (sec)')
+xlim([0 max(t)])
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 %the convolution of the signal with the window function
 subplot(3,1,2)
 plot(t,Sg,'k')
-title('Multiplication of the Signal with Gabor Transform in time domain')
+xlabel('Time (sec)')
+xlim([0 max(t)])
+title('Convolution of the Signal with Gabor Transform in time domain')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
-ylim([-1 1])
 %the normalised resulting signal in frequency domain
 subplot(3,1,3)
 plot(ks,abs(fftshift(Sgt))/max(abs(fftshift(Sgt))))
-%axis([-50 50 0 1])
+xlabel('Frequency (Hz)')
 title('Fourier Transofrm of the new signal in frequency domain')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
@@ -110,25 +134,13 @@ drawnow
 pause(0.1)
 end
 
-%plotting the spectrogram
-figure(3)
-pcolor(tslide,ks,Sgt_spec.') 
-shading interp
-set(gca, 'Ylim', [-100 100])
-colormap(jet)
-xlabel('Time')
-ylabel('Frequency')
-title('Amplitude of a particular frequency at a particular time')
-set(gca,'TickLabelInterpreter','latex')
-set(gca,'FontSize',16)
-
-%on top of each other: signal and sectrogram:
-figure
+%plot the spectrogram along with its data
+figure;
 subplot(2,1,1)
-plot(t,S)
+plot(t,S,'b')
 xlim([0 L])
-xlabel('Time')
-ylabel('Amplitude')
+xlabel('Time (sec)')
+ylabel('Signal')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 subplot(2,1,2)
@@ -136,7 +148,7 @@ pcolor(tslide,ks,Sgt_spec')
 shading interp
 colormap jet
 xlim([0 L])
-xlabel('Time')
-ylabel('Frequency')
+xlabel('Time (sec)')
+ylabel('Frequency (Hz)')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
