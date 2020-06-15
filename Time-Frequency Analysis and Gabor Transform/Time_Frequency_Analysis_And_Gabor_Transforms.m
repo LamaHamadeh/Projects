@@ -40,7 +40,7 @@ S = (3*sin(2*t)+0.5*tanh(0.5*(t-3))+0.2*exp(-(t-4).^2)+1.5*sin(5*t)+4*cos(3*(t-6
 % meandsdt = mean(dsdt(:));
 % stddsdt  = std(dsdt(:));
 % %rescale data from 0 to 1
-% %Da1 = (Da - minDa)/(maxDa - minDa);
+% %dsdt2 = (dsdt - mindsdt)/(maxdsdt - mindsdt);
 % %rescale data from -1 to 1
 % dsdt2 = (dsdt - meandsdt)./stddsdt;
 % maxdsdt2 = max(dsdt2(:));
