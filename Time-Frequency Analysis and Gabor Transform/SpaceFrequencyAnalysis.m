@@ -58,7 +58,7 @@ n = 1884; %number of points in space domain
 x2 = linspace(0,L,n+1);
 x = x2(1:n); %space domain
 %Define signal
-wave_No = 7; %wave number
+wave_No = 4; %wave number
 S = cos(wave_No*x); 
 %plotting the signal
 figure;
@@ -76,7 +76,8 @@ hold on
 %Frequency analysis
 %-----------------
 %Define wave number vector
-k = (2*pi./L).*[0:n/2-1 -n/2:-1];
+%k = (2*pi./L).*[0:n/2-1 -n/2:-1]; %wavenumber's unit here is rad. m^{-1}
+k = (1/L).*[0:n/2-1 -n/2:-1]; %wavenumber's unit here is m^{-1}
 %Fourier shift to the wave number
 ks = fftshift(k); 
 %Fourier Transform of the signal
@@ -120,6 +121,7 @@ for j=1:length(xslide)
     title('Signal with Gabor function in space domain')
     xlabel('Space')
     xticks(0:pi:6*pi)
+    xlim([0 L])
     xticklabels({'0','$\pi$','$2\pi$','$3\pi$','$4\pi$','$5\pi$','$6\pi$'})
     set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
@@ -128,6 +130,7 @@ for j=1:length(xslide)
     plot(x,Sg,'k')
     title('Convolution of the Signal with Gabor Transform in space domain')
     xticks(0:pi:6*pi)
+    xlim([0 L])
     xticklabels({'0','$\pi$','$2\pi$','$3\pi$','$4\pi$','$5\pi$','$6\pi$'})
     set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
@@ -160,7 +163,7 @@ subplot(2,1,2)
 pcolor(xslide,ks,Sgt_spec.') 
 shading interp
 set(gca, 'Ylim', [-10 10])
-colormap(jet)
+colormap hot
 xlabel('Space')
 ylabel('Wave number ($m^{-1}$)','Interpreter','latex')
 title('Amplitude of a particular wave number at a specific space location')
