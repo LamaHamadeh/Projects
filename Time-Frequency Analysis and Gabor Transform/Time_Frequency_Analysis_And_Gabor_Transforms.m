@@ -64,7 +64,8 @@ hold on
 %Frequency analysis
 %-----------------
 %Define wave number
-k = (2*pi./L).*[0:n/2-1 -n/2:-1];
+k = (2*pi./L).*[0:n/2-1 -n/2:-1]; %frequency's unit here is rad. sec^{-1}
+%k = (1/L)*[0:n/2-1 -n/2:-1];  %frequency's unit here is sec^{-1}
 ks = fftshift(k); %Fourier shift
 %Fourier Transform of the signal
 St = fft(S);
