@@ -109,9 +109,9 @@ set(gca,'FontSize',16)
 
 %Explanation:
 % As the solution evolves in time, the part with the largest magnitude of the
-% solution, travels the fastest, until it creates a steep shar shock wave,
+% solution, travels the fastest, until it creates a steep sharp shock wave,
 % and the reason that this shock waves does not become an infiniately thin,
 % is that we have the diffusion term that it spreading it out. If we remove
 % the diffusion term, then the waves becomes even sharper and the code
-% might blow up!s
+% might blow up!
 %--------------------------
