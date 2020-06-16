@@ -63,7 +63,7 @@ DATA = zeros(length(U),100); %initialise the data matrix
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
     %inverse of FT
-    Sol = ifft(Sol(TimeIteration,:)); 
+    Sol = ifft(ifftshift((Sol(TimeIteration,:)))); 
     %plotting
     figure(2)
     %absolute solution
