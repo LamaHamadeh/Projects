@@ -89,7 +89,7 @@ tspan = [tmin tmax];
     %solve
     [Time,Sol] = ode45('FFT_rhs_2D',tspan,Ut,[], KX, KY);
     %inverse of FT
-    Sol = ifft2(reshape(Sol(TimeIteration,:),Nx,Nx)); 
+    Sol = ifft2(ifftshift((reshape(Sol(TimeIteration,:),Nx,Nx)))); 
     %plotting
     figure(2)
     %surfl
