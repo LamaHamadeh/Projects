@@ -43,6 +43,7 @@ set(gca,'FontSize',16)
 %x direction
 k = (2*pi/L)*[0:(N/2-1) (-N/2):-1]'; 
 k(1) = 10^(-6);
+k = fftshift(k);
 %convert to columns so they can pass to ode45
 k = reshape(k,N,1);
 % %--------------------------
@@ -66,20 +67,22 @@ tspan = [tmin tmax];
 % 
 %                 %%%Iterate and integrate over time %%%
 %    
- for TimeIteration = 1:30
+ for TimeIteration = 1:5:500
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,Ut,[], k);
     Sol = ifft(ifftshift(Sol(TimeIteration,:))); 
-    plot(x,Sol);
-    xlabel('x')
-    ylabel('U(x,t)')
+    plot(x,abs(Sol),'b');
+    xlabel('$x$','Interpreter','latex')
+    ylabel('$|{U(x,t)|}$','Interpreter','latex')
     ylim ([0 1])
-    xlim ([-2 2])
+    xlim ([-L L])
     title('Spectral Solution of the 1D Diffusion Equation')
+    set(gca,'TickLabelInterpreter','latex')
     set(gca,'FontSize',16)
     txt = {['t = ' num2str(t)]};
     text(1,0.85,txt,'FontSize',16)
+
     drawnow;
     pause(0.1)
  end
