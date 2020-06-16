@@ -15,10 +15,10 @@ x=linspace(xmin,xmax,N); %spatial vector
                 	     %%% 1D Initial state %%%
 
 %Gaussian
-%sigma = 0.5;
-%U = exp(-x.^2/sigma^2); %Gaussian
-U = 0*x;
-U = sech(5*x); %Hyperbolic
+sigma = 0.5;
+U = exp(-x.^2/sigma^2); %Gaussian
+% U = 0*x;
+% U = sech(5*x); %Hyperbolic
 %plotting
 figure(1)
 plot(x,U,'b','LineWidth',2);
@@ -41,8 +41,9 @@ tspan = [tmin tmax];
 %                 %%%Iterate and integrate over time %%%
 
 DATA = zeros(length(U),100); %initialise the data matrix
+Time = 100; %maximum time to show the dynamics of the shock wave/solution
 
- for TimeIteration = 1:100
+ for TimeIteration = 1:Time
     t= TimeIteration * dt;               
     %solve
     [Time,Sol] = ode45('FFT_rhs_1D',tspan,U,[],N,L);
@@ -78,8 +79,8 @@ DATA = zeros(length(U),100); %initialise the data matrix
     suptitle({'Absolute Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
     set(gca,'FontSize',16)
     
+    drawnow
     hold on
-    drawnow;
     
     DATA(:,TimeIteration) = abs(Sol); %store the data at each iteration
  end
@@ -108,8 +109,10 @@ set(gca,'FontSize',16)
 
 
 %Explanation:
+% BURGERS’ EQUATION is a fundamental partial differential equation that 
+% demonstrates shock wave behaviour. 
 % As the solution evolves in time, the part with the largest magnitude of the
-% solution, travels the fastest, until it creates a steep sharp shock wave,
+% solution, travels the fastest, until it creates a steep shar shock wave,
 % and the reason that this shock waves does not become an infiniately thin,
 % is that we have the diffusion term that it spreading it out. If we remove
 % the diffusion term, then the waves becomes even sharper and the code
