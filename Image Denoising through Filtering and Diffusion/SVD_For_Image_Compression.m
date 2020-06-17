@@ -5,7 +5,6 @@ close all;
 
 %read image
 A = imread('Durham_Castle.jpg');
-%A = imread('Lily.jpeg');
 
 %convertt to gray
 X = double(rgb2gray(A));
