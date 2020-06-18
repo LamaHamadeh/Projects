@@ -80,6 +80,13 @@ set(gca,'FontSize',16)
 %Time frequency analysis (spectrogram)
 %----------------------------------------
 %A spectrogram is a visual representation of the spectrum of frequencies of a signal as it varies with time. 
+%It demonstrates the intensity of a given signal and where in the signal occurs. In other words, it shows in the same plot the 
+%frequency content along with their corresponding temporal information.
+%One known application to this is Shazam. Shazam finds the peaks in the power spectrum of a given song and tries to match this kind
+%of sparse templets of peaks to a library of known songs.
+%applications: difference between male and female voices, difference between acoustic and electric guitars, difference between the sound
+%of hot and cold water pouring,..etc.
+
 %Initialise spectrogram matrix
 Sgt_spec = []; 
 %Define the time variable for iteration
