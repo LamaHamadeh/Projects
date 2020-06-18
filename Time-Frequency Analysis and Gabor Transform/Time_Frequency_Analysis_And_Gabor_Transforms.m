@@ -84,7 +84,7 @@ set(gca,'FontSize',16)
 %frequency content along with their corresponding temporal information.
 %One known application to this is Shazam. Shazam finds the peaks in the power spectrum of a given song and tries to match this kind
 %of sparse templets of peaks to a library of known songs.
-%applications: difference between male and female voices, difference between acoustic and electric guitars, difference between the sound
+%Other applications: difference between male and female voices, difference between acoustic and electric guitars, difference between the sound
 %of hot and cold water pouring,..etc.
 
 %Initialise spectrogram matrix
