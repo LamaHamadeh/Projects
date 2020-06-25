@@ -70,7 +70,12 @@ of the poleward heat transport and are the main sources of long timescales in cl
 
 -------------------------------------------------------------
 
-*** ***: Here 
+***Spectral Analysis***: It has long been known that an arbitrary time signal can be thought of as the superposition of many sinusoidal components. This is the basis of Fourier (or spectral) analysis. Spectral methods are a class of techniques used in applied mathematics and scientific computing to numerically solve certain differential equations, potentially involving the use of the fast Fourier transform. 
+
+In this projec, we apply FFT to solve the following partial differential equations:
+- 1D and 2D Heat Equation 
+- 1D and 2D One-way Wave Equation
+- 1D and 2D Burgers' Equation
 
 -------------------------------------------------------------
 
