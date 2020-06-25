@@ -7,7 +7,7 @@
 
 -------------------------------------------------------------
 
-3- ***Principal Component Analysis for face recognition***: Dimensionality reduction, typically achieved through a principal component analysis (PCA) or orthogonal mode decomposition (POD), has achieved remarkable success in providing a mathematical framework which is much more amenable to analysis. This has allowed a better characterisation of the physics, engineering or biological system of interest. PCA is an unsupervised learning method, which seeks to find natural clustering of data in a lower dimensional feature space, whose basis contains linearly, ordered, independent, orthonormal and uncorrelated vectors that correspond to the maximum-variance directions in the original space. Interestingly, PCA can be used in the context of the computer vision problem of human face recognition. The approach of using eigenfaces for recognition functions by projecting face images onto a feature space that spans the significant variations among known face images. The significant features are known as “eigenfaces”, because they are the eigenvectors (principal components) of the set of faces. The projection operation characterises an individual face by a weighted sum of the eigenface features, and so to recognise a particular face it is necessary only to compare these weights to those of known individuals. This project uses MATLAB software to examine this method.
+3- ***Principal Component Analysis***: Dimensionality reduction, typically achieved through a principal component analysis (PCA) or orthogonal mode decomposition (POD), has achieved remarkable success in providing a mathematical framework which is much more amenable to analysis. This has allowed a better characterisation of the physics, engineering or biological system of interest. PCA is an unsupervised learning method, which seeks to find natural clustering of data in a lower dimensional feature space, whose basis contains linearly, ordered, independent, orthonormal and uncorrelated vectors that correspond to the maximum-variance directions in the original space. Interestingly, PCA can be used in the context of the computer vision problem of human face recognition. The approach of using eigenfaces for recognition functions by projecting face images onto a feature space that spans the significant variations among known face images. The significant features are known as “eigenfaces”, because they are the eigenvectors (principal components) of the set of faces. The projection operation characterises an individual face by a weighted sum of the eigenface features, and so to recognise a particular face it is necessary only to compare these weights to those of known individuals. Also, image compression with principal component analysis is a frequently occurring application of the dimension reduction technique. PCA can be used to reduce the dimensions of the matrix (image) and project those new dimensions to reform the image that retains its qualities but is smaller dimensions. This project uses MATLAB software to examine this method and apply it to these two applications.
 
 -------------------------------------------------------------
 
@@ -30,7 +30,7 @@ https://www.youtube.com/watch?v=hLNyvp6MrXs&list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt
 
 -------------------------------------------------------------
 
-6- ***Image Denoising***: With the explosion in the number of digital images taken every day, the demand for more accurate and visually pleasing images is increasing. However, the images captured by modern cameras are inevitably degraded by noise, which leads to deteriorated visual image quality. Therefore, work is required to reduce noise without losing image features (edges, corners, and other sharp structures). Image denoising is to remove noise from a noisy image, so as to restore the true image. Image denoising plays an important role in a wide range of applications such as image restoration, visual tracking, image registration, image segmentation, and image classification, where obtaining the original image content is crucial for strong performance. While many algorithms have been proposed for the purpose of image denoising, in this project, we present two image denoising techniques, filtering and smoothing. For filtering, we will present two filers, Gaussian (bell shaped) and Shannon (square function) and decide which one is the better filter and why. However for smoothing, we will use the diffusion equation to smooth out an image. 
+6- ***Image Denoising***: With the explosion in the number of digital images taken every day, the demand for more accurate and visually pleasing images is increasing. However, the images captured by modern cameras are inevitably degraded by noise, which leads to deteriorated visual image quality. Therefore, work is required to reduce noise without losing image features (edges, corners, and other sharp structures). Image denoising is to remove noise from a noisy image, so as to restore the true image. Image denoising plays an important role in a wide range of applications such as image restoration, visual tracking, image registration, image segmentation, and image classification, where obtaining the original image content is crucial for strong performance. While many algorithms have been proposed for the purpose of image denoising, in this project, we present two image denoising techniques, filtering and smoothing. For filtering, we will present two filers, Gaussian (bell shaped) and Shannon (square function) and decide which one is the better filter and why. However for smoothing, we will use the diffusion equation to smooth out an image.
 
 -------------------------------------------------------------
 
@@ -70,13 +70,10 @@ of the poleward heat transport and are the main sources of long timescales in cl
 
 -------------------------------------------------------------
 
-***PCA and Spring-Mass Systems***: Here 
+*** ***: Here 
 
 -------------------------------------------------------------
 
-***Finite Element Analysis of a Flow Over an Airfoil***: The airplane generates lift using its wings. The cross-sectional shape of the wing is called an airfoil.  
-
--------------------------------------------------------------
 
 
 
