@@ -27,16 +27,20 @@ N = (Nx * Ny);
 
 %initial consitions
 [X,Y] = meshgrid(x,y); %Nx X Ny grid
-%vorticity
-U = exp(-X.^2/0.5-Y.^2/0.5); %Gaussian
-% %plotting
-% figure(1)
-% pcolor(abs(U));
-% shading interp, colorbar, colormap jet
-% xlabel('x')
-% ylabel('y')
-% title('Initial Gaussian function')
-% set(gca,'FontSize',16)
+%IC
+sigma = 0.3;
+U = exp(-X.^2/sigma-Y.^2/sigma); %Gaussian
+%plotting
+figure(1)
+surfl(X,Y,U);
+shading interp
+colorbar
+colormap jet
+xlabel('$x$','Interpreter','latex')
+ylabel('$y$','Interpreter','latex')
+zlabel('$U(x,t)=exp\left[-\frac{(x^2+y^2)}{\sigma}\right]$','Interpreter','latex')
+title('Initial Gaussian function')
+set(gca,'FontSize',16)
 %--------------------------
                     %%% 2D Wave vector disretisation %%%
                    
