@@ -76,7 +76,7 @@ Time = 100; %maximum time to show the dynamics of the shock wave/solution
     ylim ([0 10])
     xlim ([-2 2])
 
-    suptitle({'Absolute Spectral Solution','of the 1D One-Way Wave Equation',['t = ' num2str(t)]})
+    suptitle({'Absolute Spectral Solution','of the 1D Burgers Equation',['t = ' num2str(t)]})
     set(gca,'FontSize',16)
     
     drawnow
