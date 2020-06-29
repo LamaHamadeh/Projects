@@ -28,7 +28,7 @@ y=linspace(ymin,ymax,Ny); %spatial vector
 %IC
 sigma = 1;
 U = exp(-((X-1).^2+Y.^2)/sigma); %Gaussian
-%plotting
+% %plotting
 % figure(1)
 % surfl(X,Y,U);
 % shading interp
@@ -51,7 +51,7 @@ tspan = [tmin tmax];
 % % % %--------------------------
  
                  %%%Iterate and integrate over time %%%
-
+                 
 Time = 50; %maximum time to show the dynamics of the shock wave/solution
 
  for TimeIteration = 1:3:Time
@@ -75,9 +75,11 @@ Time = 50; %maximum time to show the dynamics of the shock wave/solution
     text(1,1,1,txt,'FontSize',14)
     axis square
     set(gca,'FontSize',16)
-%     direction = [0 1 0];
-%     rotate(h,direction,45)
-    drawnow;    
+    view (90,0) % to see the dynamics on the y axis
+    view(180,0) %to show the dynamics on the x axis
+    drawnow;
+    
  end
+
 
 
