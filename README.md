@@ -76,7 +76,7 @@ In this projec, we apply FFT to solve the following partial differential equatio
 - 1D and 2D Heat Equation 
 - 1D and 2D One-way Wave Equation
 - 1D and 2D Burgers' Equation
-- 1D Korteweg–de Vries equation (KdV Equation)
+- 1D Korteweg–de Vries Equation (KdV Equation)
 
 -------------------------------------------------------------
 
