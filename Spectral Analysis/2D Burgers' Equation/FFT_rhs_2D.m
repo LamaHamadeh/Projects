@@ -52,6 +52,3 @@ rhs = - U .* (dux + duy) + nu .* (ddux + dduy);
 %-------------
 
 end
-
-
-
