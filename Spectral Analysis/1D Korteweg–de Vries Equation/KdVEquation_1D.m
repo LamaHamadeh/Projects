@@ -1,5 +1,6 @@
 
-%Code adopted from "Spectral Methods in MATLAB" By Lloyd N. Trefethen (p27.m)
+%Code adopted from "Spectral Methods in MATLAB" By Lloyd N. Trefethen 
+% code: p27.m, page: 110, 111, 112, 113
 %with some modification and added comments
 
 % Solve 1D KdV eq. u_t + uu_x + u_xxx = 0 on [-pi,pi] by
