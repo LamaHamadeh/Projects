@@ -11,7 +11,6 @@
 % Set up space grid
 N = 256;
 x = (2*pi/N)*(-N/2:N/2-1)';
-nmax = round(tmax/dt); %number of space points
 
 % Two solitons as initial condition
 A = 25; 
@@ -30,7 +29,8 @@ ik3 = 1i*k.^3;
 % Define time variable
 dt = 0.4/N^2; %time step
 tmax = 0.006; %maximum time 
-nplt = floor((tmax/25)/dt); %number of time points
+nmax = round(tmax/dt); %number of space points
+nplt = floor((tmax/25)/dt); 
 
 % initialise space and time data 
 udata = u; 
