@@ -80,6 +80,9 @@ In this projec, we apply FFT to solve the following partial differential equatio
 
 -------------------------------------------------------------
 
+***Bose–Einstein condensate***: Bose-Einstein condensation, sometimes called the fifth state of matter, is an exotic quantum phenomenon that was observed in dilute atomic gases for the first time in 1995, and is now the subject of intense theoretical and experimental study. It formed at a fraction above absolute zero and only in atoms that act like bosons, one of two types of fundamental particles. Bosons don’t follow the Pauli exclusion principle, which prohibits two particles from existing in the same quantum state. When bosonic atoms are cooled to form a condensate, they can lose their individuality. They behave like one big collective superatom.
 
+In this project,
 
+-------------------------------------------------------------
 
