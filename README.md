@@ -80,9 +80,7 @@ In this projec, we apply FFT to solve the following partial differential equatio
 
 -------------------------------------------------------------
 
-***Bose–Einstein condensate***: Bose-Einstein condensation, sometimes called the fifth state of matter, is an exotic quantum phenomenon that was observed in dilute atomic gases for the first time in 1995, and is now the subject of intense theoretical and experimental study. It formed at a fraction above absolute zero and only in atoms that act like bosons, one of two types of fundamental particles. Bosons don’t follow the Pauli exclusion principle, which prohibits two particles from existing in the same quantum state. When bosonic atoms are cooled to form a condensate, they can lose their individuality. They behave like one big collective superatom.
-
-In this project,
+***Bose–Einstein condensate***: Bose-Einstein condensation (BEC), sometimes called the fifth state of matter, is an exotic quantum phenomenon that was observed in dilute atomic gases for the first time in 1995, and is now the subject of intense theoretical and experimental study. It formed at a fraction above absolute zero and only in atoms that act like bosons, one of two types of fundamental particles. Bosons don’t follow the Pauli exclusion principle, which prohibits two particles from existing in the same quantum state. When bosonic atoms are cooled to form a condensate, they can lose their individuality. They behave like one big collective superatom. The realisation of BEC requires teachniques to cool gases to sub-microkelvin temperatures and atom traps to confine them at high densities. There are numerous kinds and types of BEC confinemnets. In this project, We discuss the harmonic (single well), double well and multiple (optical lattice) traps and investigate the quantum dynamics of the BEC within these kinds on traps. Finite Difference Method is used to solve time dependent Schrodinger equation using MATLAB and discuss how the trapping potential affects the dynamics of the BEC.
 
 -------------------------------------------------------------
 
