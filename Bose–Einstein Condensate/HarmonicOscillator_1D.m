@@ -34,7 +34,7 @@ end
 %-------------
 
 %calculate the eignevalues and eigenstates
- [V,D] = eig(H);
+ [Eigen_Fun,Eigen_Val] = eig(H);
 %-------------
                             %%%Eigenstates%%%
 
@@ -43,10 +43,10 @@ figure;
 %ground state
 subplot(2,2,1)
 %checking the normalisation of the eignestate
-Vprod1 = conj(V(:,1)).*(V(:,1))*dy; %a product between the eigenstate and 
+Vprod1 = conj(Eigen_Fun(:,1)).*(Eigen_Fun(:,1))*dy; %a product between the eigenstate and 
 %its conjugate
 Vnorm1 = sum(Vprod1); %the sum over all the region points
-Vnormalised1 = V(:,1)/sqrt(Vnorm1); %normalising the resulting eigenstate
+Vnormalised1 = Eigen_Fun(:,1)/sqrt(Vnorm1); %normalising the resulting eigenstate
 plot(y,Vnormalised1,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_0(y)$','Interpreter','latex')
@@ -67,10 +67,10 @@ set(gca,'FontSize',16)
 %first excited state
 subplot(2,2,2)
 %checking the normalisation of the eignestate
-Vprod2 = conj(V(:,2)).*(V(:,2))*dy; %a product between the eigenstate and 
+Vprod2 = conj(Eigen_Fun(:,2)).*(Eigen_Fun(:,2))*dy; %a product between the eigenstate and 
 %its conjugate
 Vnorm2 = sum(Vprod2); %the sum over all the region points
-Vnormalised2 = V(:,2)/sqrt(Vnorm2); %normalising the resulting eigenstate
+Vnormalised2 = Eigen_Fun(:,2)/sqrt(Vnorm2); %normalising the resulting eigenstate
 plot(y,Vnormalised2,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_1(y)$','Interpreter','latex')
@@ -80,10 +80,10 @@ set(gca,'FontSize',16)
 %second excited state
 subplot(2,2,3)
 %checking the normalisation of the eignestate
-Vprod3 = conj(V(:,3)).*(V(:,3))*dy; %a product between the eigenstate and 
+Vprod3 = conj(Eigen_Fun(:,3)).*(Eigen_Fun(:,3))*dy; %a product between the eigenstate and 
 %its conjugate
 Vnorm3 = sum(Vprod3); %the sum over all the region points
-Vnormalised3 = V(:,3)/sqrt(Vnorm3); %normalising the resulting eigenstate
+Vnormalised3 = Eigen_Fun(:,3)/sqrt(Vnorm3); %normalising the resulting eigenstate
 plot(y,Vnormalised3,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_2(y)$','Interpreter','latex')
@@ -93,10 +93,10 @@ subplot(2,2,4)
 %---
 %third excited state
 %checking the normalisation of the eignestate
-Vprod4 = conj(V(:,4)).*(V(:,4))*dy; %a product between the eigenstate and 
+Vprod4 = conj(Eigen_Fun(:,4)).*(Eigen_Fun(:,4))*dy; %a product between the eigenstate and 
 %its conjugate
 Vnorm4 = sum(Vprod4); %the sum over all the region points
-Vnormalised4 = V(:,4)/sqrt(Vnorm4); %normalising the resulting eigenstate
+Vnormalised4 = Eigen_Fun(:,4)/sqrt(Vnorm4); %normalising the resulting eigenstate
 plot(y,Vnormalised4,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_3(y)$','Interpreter','latex')
@@ -110,7 +110,7 @@ set(gca,'FontSize',16)
 %and V(:,2) an odd function of x, i.e., f(x) = -f(-x).
 %Thus, their product is an odd fucntion of x, the integral of an odd
 %function from-A to +A is zero.
-Vprod = conj(V(:,2)).*(V(:,1))*dy;
+Vprod = conj(Eigen_Fun(:,2)).*(Eigen_Fun(:,1))*dy;
 Vorth = sum(Vprod); %very small but not zero!
 figure;
 plot(y,Vnormalised1,'b',y,Vnormalised2,'r',y,Vprod,'k')
@@ -122,11 +122,13 @@ set(gca,'FontSize',16)
 %-------------
 
 %the probability of finding a particle in a certain energy level
-probability = conj(V(:,50)).*(V(:,50))*dy;
+probability = conj(Eigen_Fun(:,12)).*(Eigen_Fun(:,12))*dy;
 figure;
 plot(y,probability,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
-ylabel('$\left|\psi_{50}(y)\right|^2$','Interpreter','latex')
+ylabel('$\left|\psi_{12}(y)\right|^2$','Interpreter','latex')
+title({'The probability density distribution for finding the quantum' ...
+'harmonic oscillator in its n=12 quantum state'})
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 %-------------
@@ -134,10 +136,10 @@ set(gca,'FontSize',16)
                             %%%Eigenvalues%%%
 
 %looking at the eignevalues
-e0 = eig(H);
+Eigen_Val = eig(H);
 %plotting the eigenvalues
 figure;
-plot(e0)
+plot(Eigen_Val)
 xlabel('Number of eigenvalues')
 ylabel('Eigenvalues')
 set(gca,'TickLabelInterpreter','latex')
