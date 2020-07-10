@@ -15,30 +15,42 @@ y = ymin:dy:ymax; %space variable
 %-------------
 
 %double-well potential parameters
-v0 = 5; %the height (amplitude) of the Gaussian peak at the centre of the double-well 
-b = 0.25; %the inverse of the width of the Gaussian peak at the centre of the double-well.
-%b = 0.5; 
+%option1
+% v0 = 5; %the height (amplitude) of the Gaussian peak at the centre of the double-well 
+% b = 0.25; %the inverse of the width of the Gaussian peak at the centre of the double-well.
+% %b = 0.5; 
+% Vdw = y.^2/2+v0*exp(-b.*y.^2);
+%option2
+b = 0.5; %0.5
+gamma = 0.0204; %0.0204
+Vdw = -b.*y.^2+gamma.*y.^4;
+%plotting
+figure;
+plot(y,Vdw,'k','LineWidth',2)
+xlabel('$y$','Interpreter','latex')
+ylabel('$V_{\mathrm{dw}(y)}$','Interpreter','latex')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+drawnow
 %-------------
 
 %Create the Hamiltonian matrix
-%H = -hbar^2/2*m d^2/dx^2+1/2*m*w^2*x^2 + v0 exp(-x^2/2*a^2).
-%H(dimensionless) = y^2/2+v0*exp(-b*y^2).
 H = zeros(N,N); %initialise the Hamiltonian matrix
 %diagonal elements
 for n = 1:N %number of rows
     for m = 1:N %number of columns
         if (n==m)
-            H(n,m) = (ymin+(n-1)*dy)^2/2+v0*exp(-b*(ymin+(n-1)*dy)^2)+1/(dy)^2; %yn = ymin+(n-1)*dy
+            H(n,m) = 2/(dy)^2+Vdw(n); %yn = ymin+(n-1)*dy
         end
     end
 end
 %the off-diagonal elements
 for n =1:N-1
-    H(n,n+1) = -1/(2*(dy)^2); %the value of each upper off-diagonal element
+    H(n,n+1) = -1/(dy)^2; %the value of each upper off-diagonal element
 end
 
 for n = 2:N
-    H(n,n-1) = -1/(2*(dy)^2); %the value of each lower off-diagonal element
+    H(n,n-1) = -1/(dy)^2; %the value of each lower off-diagonal element
 end
 %-------------
 
@@ -56,7 +68,7 @@ Vprod1 = conj(Eigen_Fun(:,1)).*(Eigen_Fun(:,1))*dy; %a product between the eigen
 %its conjugate
 Vnorm1 = sum(Vprod1); %the sum over all the region points
 Vnormalised1 = Eigen_Fun(:,1)/sqrt(Vnorm1); %normalising the resulting eigenstate
-plot(y,abs(Vnormalised1),'k','LineWidth',2)
+plot(y,Vnormalised1,'k','LineWidth',2)
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_0(y)$','Interpreter','latex')
 set(gca,'TickLabelInterpreter','latex')
@@ -111,7 +123,7 @@ set(gca,'FontSize',16)
 Vprod = conj(Eigen_Fun(:,2)).*(Eigen_Fun(:,1))*dy;
 Vorth = sum(Vprod); %very small but not zero!
 figure;
-plot(y,Vnormalised1,'b',y,Vnormalised2,'r',y,Vprod,'k')
+plot(y,Vnormalised1,'b',y,Vnormalised2,'r.',y,Vprod,'k')
 legend('Ground state','First excited state','Orthogonality')
 xlabel('$y$','Interpreter','latex')
 ylabel('$\psi_i(y), i=1,2$','Interpreter','latex')
@@ -119,7 +131,7 @@ set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 %-------------
 
-                            %%%Eigenvalues%%%
+                            %%Eigenvalues%%%
 
 %looking at the eignevalues
 Eigen_Val = eig(H);
