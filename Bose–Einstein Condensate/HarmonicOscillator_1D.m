@@ -1,6 +1,7 @@
 
 %Eigenvalues and Eigenvectors/Eigenstates of the harmonic oscillator 
 %using Finite Difference Method
+%Time independent Schrodinger Equation
 
 clear all;
 close all;
@@ -14,12 +15,14 @@ y = ymin:dy:ymax; %space variable
 %-------------
 
 %Create the Hamiltonian matrix
+%H = -hbar^2/2*m d^2/dx^2+1/2*m*w^2*x^2.
+%H(dimensionless) = -1/2*d^2/dy^2+y^2/2.
 H = zeros(N,N); %initialise the Hamiltonian matrix
 %diagonal elements
 for n = 1:N %number of rows
     for m = 1:N %number of columns
         if (n==m)
-            H(n,m) = (ymin+(n-1)*dy)^2/2+1/(dy)^2; %the value of each diagonal element
+            H(n,m) = (ymin+(n-1)*dy)^2/2+1/(dy)^2; %yn = ymin+(n-1)*dy
         end
     end
 end
@@ -54,7 +57,7 @@ set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 % %comparing between the numerical and analytical solution of the ground
 % %state
-% Analytical_solution = (1/pi)^0.25*exp(-y.^2/2);
+Analytical_solution = (1/pi)^0.25*exp(-y.^2/2);
 % plot(y,Vnormalised1,'k','LineWidth',2)
 % hold on
 % plot(y,Analytical_solution,'r.','LineWidth',0.1)
@@ -63,6 +66,10 @@ set(gca,'FontSize',16)
 % set(gca,'TickLabelInterpreter','latex')
 % set(gca,'FontSize',16)
 % legend('Numerical','Analytical')
+%estimate the error rate between the numerical and analytical solutions
+Enum = Vnormalised1;
+Eana = Analytical_solution';
+Error_rate = abs((Enum - Eana)/Eana);
 %---
 %first excited state
 subplot(2,2,2)
@@ -139,7 +146,7 @@ set(gca,'FontSize',16)
 Eigen_Val = eig(H);
 %plotting the eigenvalues
 figure;
-%plot the entire spectrum of the eigenvalues
+% %plot the entire spectrum of the eigenvalues
 % plot(Eigen_Val)
 % xlabel('Number of eigenvalues')
 % ylabel('Eigenvalues')
