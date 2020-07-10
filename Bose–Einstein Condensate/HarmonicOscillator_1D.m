@@ -139,9 +139,35 @@ set(gca,'FontSize',16)
 Eigen_Val = eig(H);
 %plotting the eigenvalues
 figure;
-plot(Eigen_Val)
-xlabel('Number of eigenvalues')
+%plot the entire spectrum of the eigenvalues
+% plot(Eigen_Val)
+% xlabel('Number of eigenvalues')
+% ylabel('Eigenvalues')
+% set(gca,'TickLabelInterpreter','latex')
+% set(gca,'FontSize',16)
+%----
+%plot the first four eigenvalues
+%1st
+h1 = plot(Eigen_Val(1),'ko','MarkerSize',15,'LineWidth',2);
+set(h1, 'MarkerFaceColor', get(h1,'Color'));
+text(1.03,0.5,'$E_0=\frac{1}{2}$','Interpreter','latex','FontSize',24,'Color','black')
+hold on
+%2nd
+h2 = plot(Eigen_Val(2),'bo','MarkerSize',15,'LineWidth',2);
+set(h2, 'MarkerFaceColor', get(h2,'Color'));
+text(1.03,1.5,'$E_1=\frac{3}{2}$','Interpreter','latex','FontSize',24,'Color','blue')
+%3rd
+h3 = plot(Eigen_Val(3),'go','MarkerSize',15,'LineWidth',2);
+set(h3, 'MarkerFaceColor', get(h3,'Color'));
+text(1.03,2.5,'$E_2=\frac{5}{2}$','Interpreter','latex','FontSize',24,'Color','green')
+%4th
+h4 = plot(Eigen_Val(4),'ro','MarkerSize',15,'LineWidth',2);
+set(h4, 'MarkerFaceColor', get(h4,'Color'));
+text(1.03,3.5,'$E_3=\frac{7}{2}$','Interpreter','latex','FontSize',24,'Color','red')
+
+set(gca,'xtick',[])
 ylabel('Eigenvalues')
+ylim([0 4])
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 %-------------
