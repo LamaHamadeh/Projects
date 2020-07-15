@@ -1,4 +1,6 @@
 
+%%Still Working on it!
+
 %Solve 1D non-linear Schrodinger equation (Gross Pitaevskii equation)
 %using the operator splitting technique and Fast Fourier Transform
 
