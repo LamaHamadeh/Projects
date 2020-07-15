@@ -1,5 +1,5 @@
 
-%Eigenvalues and Eigenvectors/Eigenstates of the double well potential with a Gaussian barrier 
+%Eigenvalues and Eigenvectors/Eigenstates of the double well potential trap 
 %using Finite Difference Method
 %Time independent Schrodinger Equation
 
@@ -16,14 +16,15 @@ y = ymin:dy:ymax; %space variable
 
 %double-well potential parameters
 %option1
-% v0 = 5; %the height (amplitude) of the Gaussian peak at the centre of the double-well 
-% b = 0.25; %the inverse of the width of the Gaussian peak at the centre of the double-well.
-% %b = 0.5; 
+% v0 = 9; %the height (amplitude) of the Gaussian peak at the centre of the double-well 
+% % b = 0.25; %the inverse of the width of the Gaussian peak at the centre of the double-well.
+% b = 1.5; 
 % Vdw = y.^2/2+v0*exp(-b.*y.^2);
 %option2
-b = 0.5; %0.5
-gamma = 0.0204; %0.0204
-Vdw = -b.*y.^2+gamma.*y.^4;
+b = 0.5;
+%gamma = 0.044877;
+gamma = 0.044;
+Vdw = -b*y.^2+gamma*y.^4+1.393;
 %plotting
 figure;
 plot(y,Vdw,'k','LineWidth',2)
@@ -40,17 +41,17 @@ H = zeros(N,N); %initialise the Hamiltonian matrix
 for n = 1:N %number of rows
     for m = 1:N %number of columns
         if (n==m)
-            H(n,m) = 2/(dy)^2+Vdw(n); %yn = ymin+(n-1)*dy
+            H(n,m) = 2/dy^2+Vdw(n); %yn = ymin+(n-1)*dy
         end
     end
 end
 %the off-diagonal elements
 for n =1:N-1
-    H(n,n+1) = -1/(dy)^2; %the value of each upper off-diagonal element
+    H(n,n+1) = -1/dy^2; %the value of each upper off-diagonal element
 end
 
 for n = 2:N
-    H(n,n-1) = -1/(dy)^2; %the value of each lower off-diagonal element
+    H(n,n-1) = -1/dy^2; %the value of each lower off-diagonal element
 end
 %-------------
 
@@ -169,3 +170,33 @@ ylabel('Eigenvalues')
 set(gca,'TickLabelInterpreter','latex')
 set(gca,'FontSize',16)
 %-------------
+
+%Calculating the tunneling rate using two localised left and right
+%the left localised numerical state/mode
+phi_L = Vnormalised1+Vnormalised2/sqrt(2);
+%the right localised numerical state/mode
+phi_R = Vnormalised1-Vnormalised2/sqrt(2);
+
+%Gaussian functions
+DW_min = sqrt(b/(2*gamma));
+%left Gaussian function
+G_L = (1/pi)^(1/4).*exp(-(y+DW_min).^2);
+%left Gaussian function
+G_R = (1/pi)^(1/4).*exp(-(y-DW_min).^2);
+
+%plotting
+figure;
+plot(y,-phi_L,'r',y,-phi_R,'b')
+hold on
+plot(y,G_L,'r.',y,G_R,'b.')
+xlabel('y','Interpreter','latex')
+ylabel('Ground State')
+set(gca,'TickLabelInterpreter','latex')
+set(gca,'FontSize',16)
+legend('Left Localised Mode','Right Localised Mode',...
+    'Left Gaussian Fucntion','Right Gaussian Fucntion')
+
+%-------------
+
+
+
