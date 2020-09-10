@@ -1,7 +1,6 @@
 clear all;
 close all;
 
-
 %% spatiotemporal variables
 %space
 xi = linspace(-10,10,400);
@@ -17,6 +16,7 @@ dt = t(2)-t(1); %time step
 f1 = sech(Xgrid+3).*(1*exp(1i*2.3*T));
 f2 = (sech(Xgrid).*tanh(Xgrid)).*(2*exp(1i*2.8*T));
 f = f1+f2;
+%plotting
 %first function
 figure(1)
 subplot(2,2,1)
@@ -32,29 +32,34 @@ colormap (gray)
 subplot(2,2,3)
 surfl(Xgrid,T,real(f));
 shading interp
-colormap (gray)
+colormap (gray) 
+%the question is: if you measure (f), could you back up the two modes that
+%build it, i.e., f1 and f2.
 
 %% svd, low rank structure
 [u,s,v] = svd(f.');
 %eigenvalues of svd
+%plotting eigenvalues
 figure(2)
-plot(diag(s)/(sum(diag(s))),'ro')
-
-%plot 
+plot(diag(s)/(sum(diag(s))),'ro') %it is obvious that we have two dominant modes
+%plotting eigenvectors
 figure(3)
+%plot the spatial modes
 subplot(2,1,1)
 plot(real(u(:,1:2)),'Linewidth',2)%modes
-
-%plot
+%plot the temporal modes
 subplot(2,1,2)
-plot(real(v(:,1:2))) %what modes behave as a function of time
+plot(real(v(:,1:2))) 
 
 %% DMD
+%the total dataset matrix
 X = f.'; %rows are spatial data and columns are time snapshots.
-
+%the current dataset matrix
 X1 = X(:,1:end-1);
+%the +dt dataset matrix
 X2 = X(:,2:end);
 
+%STEP 1: SVD
 %rank trauncation (2 modes)
 r = 2;
 [U,S,V] = svd(X1,'econ');
@@ -63,26 +68,26 @@ Ur = U(:,1:r);
 Sr = S(1:r,1:r);
 Vr = V(:,1:r);
 
-%least square matrix
+%least square matrix/linear operator
 Atilde = Ur'*X2*Vr/Sr;
+%eigen decomposition
 [W,D] = eig(Atilde); %eigenvectors and eigenvalues
-
-Phi = X2*Vr/Sr*W; %DMD modes
-
+%DMD modes 
+Phi = X2*Vr/Sr*W; 
+%DMD eigenvalues
 lambda = diag(D);
 omega = log(lambda)/dt;
-
+%plotting
 figure(3)
 subplot(2,1,1), hold on
 plot(real(Phi),'Linewidth',2)
 
-
 %reconstruction of modes/function in time
-X1 = X(:,1); %t=0
-b = Phi\X1;
+x1 = X(:,1); %t=0
+b = Phi\x1;
 
-%future preiction
-t2 = linspace(0,20*pi,200);
+%short-timefuture preiction
+%t2 = linspace(0,20*pi,200);
 
 time_dynamics = zeros(r,length(t));
 for iter = 1:length(t)
@@ -90,6 +95,7 @@ for iter = 1:length(t)
 end
 
 X_DMD = Phi * time_dynamics;
+%plotting
 figure(1)
 subplot(2,2,4)
 surfl(Xgrid,T,real(X_DMD).')
@@ -103,9 +109,4 @@ xlabel('Real')
 ylabel('Imaginary')
 xlim([0 0.2])
 ylim([2 3])
-
-
-
-
-
 
