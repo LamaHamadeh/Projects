@@ -1,7 +1,7 @@
 clear all;
 close all;
 
-%%%%%%%%%%% NLS SOLVE - CREATION OF DATA
+%NLS SOLVE - CREATION OF DATA
 % space
 L=30;
 n=512;
@@ -10,12 +10,8 @@ x=x2(1:n);
 k=(2*pi/L)*[0:n/2-1 -n/2:-1].';
 % time
 slices=20;
-t=linspace(0,2*pi,slices+1);
+t=linspace(0,pi,slices+1);
 dt=t(2)-t(1);
-
-%   nf=0.5;
-%   slicesf=2*slices*nf;
-%   tf=linspace(0,2*pi*nf,slicesf+1);
 
 % initial conditions
 N=2;
@@ -25,107 +21,149 @@ ut=fft(u);
 for j=1:length(t)
     usol(j,:)=ifft(utsol(j,:));  % bring back to space
 end
-
-subplot(1,5,1), waterfall(x,t,abs(usol)), colormap([0 0 0])
-set(gca,'Ylim',[0 2*pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
-xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
-axis square
-
 X = usol.';  % here is the data
 
-%%%%%% body of DMD %%%%%%%%%%
+%--------------
+
+%DMD
 X1 = X(:,1:end-1);
 X2 = X(:,2:end);
 
-[U2,Sigma2,V2] = svd(X1, 'econ');
-r=10;
-U=U2(:,1:r);
-Sigma=Sigma2(1:r,1:r);
-V=V2(:,1:r);
-Atilde = U'*X2*V/Sigma;
-[W,D] = eig(Atilde);
-Phi=X2*V/Sigma*W;
+[U1,Sigma1,V1] = svd(X1, 'econ');
+rDMD=10;
+UDMD=U1(:,1:rDMD);
+SigmaDMD=Sigma1(1:rDMD,1:rDMD);
+VDMD=V1(:,1:rDMD);
+Atilde_DMD = UDMD'*X2*VDMD/SigmaDMD;
+[WDMD,DDMD] = eig(Atilde_DMD);
+Phi=X2*VDMD/SigmaDMD*WDMD;
 
-mu=diag(D);
-omega=log(mu)/dt;
+%eigenvalues
+lambda1=diag(DDMD);
+OmegaDMD=log(lambda1)/dt;
 
-y0 = Phi\u;  % pseudo-inverse initial conditions
+y01 = Phi\u;  % pseudo-inverse initial conditions
 
-u_modes = zeros(r,length(t));  % DMD reconstruction for every time point
+u_modes = zeros(rDMD,length(t));  % DMD reconstruction for every time point
 for iter = 1:length(t)
-    u_modes(:,iter) =(y0.*exp(omega*(t(iter))));
+    u_modes(:,iter) =(y01.*exp(OmegaDMD*(t(iter))));
 end
 u_dmd = Phi*u_modes;   % DMD resconstruction with all modes
 
-% figure(3), subplot(3,3,1), waterfall(x,1:r,abs(Phi).'), colormap([0 0 0])
-% set(gca,'Xlim',[-8 8],'Xtick',[-8 0 8],'Ylim',[1 r],'Ytick',[1 r],'Fontsize',[14],'Zlim',[0 0.4],'Ztick',[0 0.2 0.4])
-% figure(7), subplot(3,3,4), plot(omega,'ko','Linewidth',[2]), grid on, axis([-5 1 -20 20]), set(gca,'Fontsize',[14])
-%
-%
-figure(1), subplot(1,5,2), waterfall(x,t,abs(u_dmd).'), colormap([0 0 0])
-set(gca,'Ylim',[0 2*pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
-xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
-axis square
-
-% figure(7), subplot(3,3,1), waterfall(x,tf,abs(u_dmd).'), colormap([0 0 0])
-%    set(gca,'Ylim',[0 2*pi*nf],'Ytick',[0 3 6],'Fontsize',[14],'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
-%
+%error estimation
 for j=1:length(t)
-    error1(j)=norm(u_dmd(:,j)-usol(j,:).');
+    error2(j)=norm(u_dmd(:,j)-usol(j,:).');
 end
 
+%--------------
 
-% Koopman
+%Koopman1
+Y1=[X1; (X1.*abs(X1).^2)];
+Y2=[X2; (X2.*abs(X2).^2)];
+[U2,Sigma2,V2] = svd(Y1, 'econ');
+rKoop=10; 
+UKoop=U2(:,1:rKoop); 
+SigmaKoop=Sigma2(1:rKoop,1:rKoop); 
+VKoop=V2(:,1:rKoop);
+Atilde_Koop = UKoop'*Y2*VKoop/SigmaKoop;
+[WKoop,DKoop] = eig(Atilde_Koop);
+Phi2=Y2*VKoop/SigmaKoop*WKoop;
 
-for jkoop=1:2
-    if jkoop==1
-        Y1=[X1; (X1.*abs(X1).^2)];
-        Y2=[X2; (X2.*abs(X2).^2)];
-    else if jkoop==2
-            Y1=[X1; (abs(X1).^2)];
-            Y2=[X2; (abs(X2).^2)];
-        end
-    end
-    
-    [U2,Sigma2,V2] = svd(Y1, 'econ');
-    r=10;
-    U=U2(:,1:r);
-    Sigma=Sigma2(1:r,1:r);
-    V=V2(:,1:r);
-    Atilde = U'*Y2*V/Sigma;
-    [W,D] = eig(Atilde);
-    Phi2=Y2*V/Sigma*W;
-    mu=diag(D);
-    omega=log(mu)/dt;
-    
-    u2=[u; (u.*abs(u).^2)];
-    y0 = Phi2\u2;  % pseudo-inverse initial conditions
-    
-    u_modes = zeros(r,length(t));  % DMD reconstruction for every time point
-    for iter = 1:length(t)
-        u_modes(:,iter) =(y0.*exp(omega*(t(iter))));
-    end
-    u_dmd2 = Phi2*u_modes;
-    
-    % DMD resconstruction with all modes
-    u_dmd = u_dmd2(1:n,:);
-    
-    
-    Phi = Phi2(1:n,:);
-    
-    if jkoop==1
-        figure(1), subplot(1,5,2+jkoop), waterfall(x,t,abs(u_dmd).'), colormap([0 0 0])
-        set(gca,'Ylim',[0 2*pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
-        axis square
-    
-    else if jkoop==2
-        figure(1), subplot(1,5,2+jkoop), waterfall(x,t,abs(u_dmd).'), colormap([0 0 0])
-        set(gca,'Ylim',[0 2*pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
-        axis square
-        
-        end
-    end
+lambda2=diag(DKoop);
+OmegaKoop=log(lambda2)/dt;
+
+u2=[u; (u.*abs(u).^2)];
+y0 = Phi2\u2;  % pseudo-inverse initial conditions
+
+u_modes = zeros(rKoop,length(t));  % DMD reconstruction for every time point
+for iter = 1:length(t)
+    u_modes(:,iter) =(y0.*exp(OmegaKoop*(t(iter))));
 end
-    
-    
+u_dmd2 = Phi2*u_modes;   % DMD resconstruction with all modes
+
+u_Koop = u_dmd2(1:n,:);
+Phi_Koop = Phi2(1:n,:);
+
+%error estimation
+for j=1:length(t)
+    error3(j)=norm(u_Koop(:,j)-usol(j,:).');
+end
+
+%--------------
+
+%Koopman2
+W1=[X1; (abs(X1).^2)];
+W2=[X2; (abs(X2).^2)];
+[U3,Sigma3,V3] = svd(W1, 'econ');
+rKoop2=10; 
+UKoop2=U3(:,1:rKoop2); 
+SigmaKoop2=Sigma3(1:rKoop2,1:rKoop2); 
+VKoop2=V3(:,1:rKoop2);
+Atilde_Koop2 = UKoop2'*W2*VKoop2/SigmaKoop2;
+[WKoop2,DKoop2] = eig(Atilde_Koop2);
+Phi3=W2*VKoop2/SigmaKoop2*WKoop2;
+
+lambda3=diag(DKoop2);
+OmegaKoop2=log(lambda3)/dt;
+
+u2=[u; (u.*abs(u).^2)];
+y0 = Phi3\u2;  % pseudo-inverse initial conditions
+
+u_modes = zeros(rKoop2,length(t));  % DMD reconstruction for every time point
+for iter = 1:length(t)
+    u_modes(:,iter) =(y0.*exp(OmegaKoop2*(t(iter))));
+end
+u_dmd2 = Phi3*u_modes;   % DMD resconstruction with all modes
+
+u_Koop2 = u_dmd2(1:n,:);
+Phi_Koop2 = Phi2(1:n,:);
+
+%error estimation
+for j=1:length(t)
+    error4(j)=norm(u_Koop2(:,j)-usol(j,:).');
+end
+
+%--------------
+
+%visualisation
+%numerical solution
+subplot(3,4,1), waterfall(x,t,abs(usol)), colormap([0 0 0])
+set(gca,'Ylim',[0 pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
+xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
+axis square, title('PDE')
+%DMD
+subplot(3,4,2), waterfall(x,t,abs(u_dmd).'), colormap([0 0 0])
+set(gca,'Ylim',[0 pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
+xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
+axis square, title('DMD')
+%Koop
+subplot(3,4,3), waterfall(x,t,abs(u_Koop).'), colormap([0 0 0])
+set(gca,'Ylim',[0 pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 4],'Ztick',[0 2 4])
+xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
+axis square, title('Koopman (u.|u|^2)')
+%Koop
+subplot(3,4,4), waterfall(x,t,abs(u_Koop2).'), colormap([0 0 0])
+set(gca,'Ylim',[0 pi],'Ytick',[0 3 6],'Fontsize',14,'Xlim',[-15 15],'Xtick',[-15 0 15],'Zlim',[0 10],'Ztick',[0 5 10])
+xlabel('\xi','Fontsize',14), ylabel('time','Fontsize',14)
+axis square, title('Koopman (|u|^2)')
+
+%eigenvalues
+%DMD
+subplot(3,4,6)
+plot(OmegaDMD,'ko','Linewidth',2), grid on, axis square
+%Koop
+subplot(3,4,7)
+plot(OmegaKoop,'ko','Linewidth',2), grid on, axis square
+%Koop
+subplot(3,4,8)
+plot(OmegaKoop2,'ko','Linewidth',2), grid on, axis square
+
+%error estimaton
+subplot(3,4,[9,12])
+semilogy(t,error2,'k:',t,error3,'k-.',t,error4,'ks','LineWidth',2)
+%set(gca,'Ylim',[10^(-6) 10^2],'Ytick',[10^(-6) 10^(-4) 10^(-2) 10^0 10^2])
+xlabel('Time')
+ylabel('Error')
+legend('DMD', 'Koopman','Koopman')
+
     
