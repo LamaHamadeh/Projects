@@ -16,6 +16,7 @@ t=linspace(0,pi,slices+1);
 dt=t(2)-t(1);
 
 %%%%NLS equation solve (creation of data)
+%i*ut+(1/2)*uxx+u.*|u|^2=0
 %%%-----------------------------------------
 %initial conditions
 N=2;
