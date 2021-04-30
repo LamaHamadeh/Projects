@@ -8,7 +8,6 @@ clear all;
 % % Notify me that it's beginning the simulation
 %fprintf('\n Simulating...\n\n');
 % %-----------------------------
-
 %Construct the flow map
 %The flow map bascially takes the initial pair (s0,p0) and evolve it so
 %it hits the boundary/edge where a reflection/bounce happens there 
@@ -41,9 +40,7 @@ hold on
 % %-----------------------------
 
 %iteration (this is "Step 5" after constructing the initial bounce)
-%for k = 0:10 %iterations
-%for s = 0:L/ns:L %starting points
-%for p = -1:1 %starting directions
+
 %Step 2: Compute both line equations in form of Ax + By + C = 0.
 
 %Since the slope-intercept line formula does not hold in case of a vertical
@@ -52,11 +49,10 @@ hold on
 %write the line equation in its standard form as: Ax + By + C = 0, where 
 %here a vertical line would simply mean B = 0.
 
-for iter = 1 : 5
-
 %Compute first line equation | L1: Ax + By + C = 0 
 %first line coordinates
 x1L1 = 0.7;  y1L1 = 0;
+
 x2L1 = 1  ;  y2L1 = 0.5;
 
 %Setting the determinant to be zero to get the line's standrad formula
@@ -72,8 +68,8 @@ axis([min(s) max(s) min(s) max(s)])
 L1v = [x2L1,y2L1] - [x1L1,y1L1]; %compute the x and y projections of L1
 %defining the vertical norm
 vnorm = x1L1;
-Nvx = [0 vnorm];  %the verticle normal vector 
-%plot the verticle norm line
+Nvx = [0 vnorm];  %the vertical normal vector 
+%plot the vertical norm line
 y=get(gca,'ylim');
 hold on
 plot([vnorm vnorm],y,'g','LineWidth',2)
@@ -141,8 +137,8 @@ L2v = [x2L2,y2L2] - [x1L2,y1L2]; %compute the x and y projections of L2
 if -D/E > 0
     %defining the vertical norm
     vnorm = x1L2;
-    Nvx = [0 vnorm];  %the verticle normal vector 
-    %plot the verticle norm line
+    Nvx = [0 vnorm];  %the vertical normal vector 
+    %plot the vertical norm line
     y=get(gca,'ylim');
     hold on
     plot([vnorm vnorm],y,'g','LineWidth',2)
@@ -176,11 +172,6 @@ if -D/E < 0
             theta2*(180/pi),p2');
 end
 
-pause(2)
-
-end
-
-
 % %-------
 
 %Step 3: Before finding the intersection point coordinate, check whether 
@@ -203,7 +194,6 @@ if determinant ==0
         fprintf('Both lines meet at the point (x=%g , y=%g)\n',...
             inter_coor(1,1),inter_coor(2,1)); %show the intersection point coordinates
 end
-
 
 % %-----------------------------
 
