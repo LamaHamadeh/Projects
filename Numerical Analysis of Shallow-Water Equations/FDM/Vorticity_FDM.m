@@ -50,7 +50,7 @@ A = A/(delta^2);
 
 %Create matrix B (first order derivative in x)
 %---------------------------------------------
-adds = (1/2/delta)*ones(N, 1);
+adds = ((1/2)/delta)*ones(N, 1);
 subs = -1*adds;
 B = spdiags([adds adds subs subs], [Nx -(N-Nx) (N-Nx) -Nx], N, N);
 %spy(B) %show the sparsity patterns of the matrix
@@ -58,7 +58,7 @@ B = spdiags([adds adds subs subs], [Nx -(N-Nx) (N-Nx) -Nx], N, N);
 %Create matrix C (first order derivative in y)
 %---------------------------------------------
 C = spdiags([e5 -e2 e3 -e4], [-(Nx-1) -1 1 (Nx-1)], N, N);
-C = (1/2/delta).*C;
+C = ((1/2)/delta).*C;
 %spy(C) %show the sparsity patterns of the matrix
 
                 	     %%% Initial state %%%
@@ -67,12 +67,12 @@ C = (1/2/delta).*C;
 [X,Y] = meshgrid(x,y);
 % Defining vorticity initial state/condition:
 %option 1: %one Gaussian at the centre
-% w0 = exp(-2*X.^2-Y.^2/20); 
+w0 = exp(-2*X.^2-Y.^2/20); 
 % w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
 %option 2: %two same gaussians voticies next to each other which can be
 %made to collide
-w0 = exp(-2*(X+2).^2-(Y).^2/20) + exp(-2*(X-2).^2-(Y).^2/20); 
+%w0 = exp(-2*(X+2).^2-(Y).^2/20) + exp(-2*(X-2).^2-(Y).^2/20); 
 w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
 %option 3: %multiple gaussians
@@ -81,8 +81,8 @@ w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 % w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
 %option 4: one positive Gaussian and one negative Gaussian
-%w0 = exp(-2*(X+2).^2-(Y+6).^2/20) - exp(-2*(X-2).^2-(Y+6).^2/20); 
-% w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
+%w = exp(-2*(X+2).^2-(Y+6).^2/20) - exp(-2*(X-2).^2-(Y+6).^2/20); 
+
 
                 %%%Iterate and integrate over time %%%
 %ode45
@@ -90,67 +90,71 @@ w_vec = reshape(w0, [N 1]); %convert to a vector so it can be passed to ode45
 
 
                        %%% plotting %%%
-    
+
+%define the splitting time steps
+tstep = round(linspace(1,length(tspan),9));    
+
+%plotting                       
 figure;
 %t=0
 subplot(3,3,1)
-imagesc(abs(reshape(Omega(1,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(1),:),Nx,Nx)))
 axis square
 colormap jet
 %t=0
 subplot(3,3,2)
-imagesc(abs(reshape(Omega(10,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(2),:),Nx,Nx)))
 axis square
 colormap jet
 %t=0
 subplot(3,3,3)
-imagesc(abs(reshape(Omega(25,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(3),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,4)
 %t=0
-imagesc(abs(reshape(Omega(75,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(4),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,5)
 %t=0
-imagesc(abs(reshape(Omega(100,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(5),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,6)
 %t=0
-imagesc(abs(reshape(Omega(125,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(6),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,7)
 %t=0
-imagesc(abs(reshape(Omega(175,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(7),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,8)
 %t=0
-imagesc(abs(reshape(Omega(225,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(8),:),Nx,Nx)))
 axis square
 colormap jet
 subplot(3,3,9)
 %t=0
-imagesc(abs(reshape(Omega(267,:),Nx,Nx)))
+imagesc(abs(reshape(Omega(tstep(9),:),Nx,Nx)))
 axis square
 colormap jet
 
-%all in one plot
-for j = 1:length(tspan)
-    w=abs(reshape(Omega(j,:),Nx,Nx));
-    figure(2)
-    pcolor(x,y,w);
-    shading interp
-    colorbar
-    colormap jet
-    drawnow
-    axis square
-    xlabel('x')
-    ylabel('y')
-end
+% %all in one plot
+% for j = 1:length(tspan)
+%     w=abs(reshape(Omega(j,:),Nx,Nx));
+%     figure(2)
+%     pcolor(x,y,w);
+%     shading interp
+%     colorbar
+%     colormap jet
+%     drawnow
+%     axis square
+%     xlabel('x')
+%     ylabel('y')
+% end
 
                        %%% Make a video %%%
 %figure;
