@@ -3,6 +3,8 @@
 clear all;
 close all;
 
+tic %Start recording the elapsed computational time
+
              %%% Define Discretised spatial and time variables %%% 
 
 %Space
@@ -175,5 +177,5 @@ colormap jet
 %writeVideo(v, F);
 %close(v);
 
-
+toc %Finish recording the elapsed computational time and show it on the screen
 
