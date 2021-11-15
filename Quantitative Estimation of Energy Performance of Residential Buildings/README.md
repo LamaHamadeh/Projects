@@ -14,11 +14,11 @@ their energy performance during their busy times.
 ***Main steps.***
 
 1. Read and understand the paper: 
-Athanasios, T. and Angeliki, X., * *"Accurate quantitative estimation of energy performance of residential buildings using statistical machine learning tools", 
-Energy and Buildings, Volume 49, June 2012, Pages 560-567. URL: https://www.sciencedirect.com/science/article/abs/pii/S037877881200151X* *
+Athanasios, T. and Angeliki, X., *"Accurate quantitative estimation of energy performance of residential buildings using statistical machine learning tools", 
+Energy and Buildings, Volume 49, June 2012, Pages 560-567. URL: https://www.sciencedirect.com/science/article/abs/pii/S037877881200151X*
 
-2. Download the dataset from the * *Machine Learning Repository: Center for Machine Learning and Intelligent Systems. 
-URL: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency* * 
+2. Download the dataset from the *Machine Learning Repository: Center for Machine Learning and Intelligent Systems. 
+URL: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency*
 
 3. Familiarize yourself with Python programming language and download Anaconda software to use Jupyter Notebook as your main computational tool.
 
