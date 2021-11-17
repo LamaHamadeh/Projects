@@ -28,7 +28,7 @@ URL: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency*
 
 6. Build the model.
 
-7. Obtain information from several UCL high populated/used buildings. In this step, you need to know the right people or places to contact to obtain 
+7. Obtain information from several UCL highly populated/used buildings. In this step, you need to know the right people or places to contact to obtain 
 such structural engineering information.
 
 8. Pass the collected data into the regression model to accurately estimate (or predict) the heating and cooling loads of the chosen building for the aim 
