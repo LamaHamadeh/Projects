@@ -38,4 +38,4 @@ of enhancing their energy efficiency performance.
 ***Software.***
 
 Mainly, you will be using Python as a programming language to perform and apply the Machine Learning algorithm. This can be done using Jupyter Notebook 
-application obtained from Anaconda distribution. If you are not familiar with it, let me know.
+application obtained from Anaconda distribution. 
