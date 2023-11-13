@@ -1,8 +1,9 @@
 
-%Case 1: this is the ideal case where you consider a small displacement of
-% the mass in the z direction and the ensuing oscillations. In this case, 
-% the entire motion is in the z direction with the simple harmonic motion 
-% being observed (camN_1.mat where N=1,2,3).
+%Case 2: this is the noisy case where you repeat the ideal case experiment,
+%but this time, introduce camera shake into the video recording. This should 
+%make it more difficult to extract the simple harmonic motion. But if the 
+%shake isn't too bad, the dynamics will still be extracted with the PCA 
+%algorithms. (camN_2.mat where N=1,2,3)
 
 close all;
 clear all;
